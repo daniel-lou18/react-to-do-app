@@ -1,1 +1,703 @@
-/* TODO Add site wide styles */
+@font-face {
+  font-family: 'Roboto';
+  src: url('./roboto-v30-latin-regular.woff2') format('woff2'),
+    url('./roboto-v30-latin-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --main-hd-color: rgb(255, 99, 71);
+  --main-hd-color-hover: rgb(220, 20, 60);
+  --main-bg-color: rgb(250,250,250);
+  --main-hv-color: rgb(222, 184, 135, 0.1);
+  --btn-bg-color: rgb(255,218,185);
+  --btn-bg-color-hover: rgb(239, 204, 174);
+  --main-bd-color: rgb(128, 128, 128, 0.5);
+  --main-bd-radius: 5px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  display: grid;
+  align-content: start;
+  grid-template-columns: 325px 1fr;
+  grid-template-rows: 55px calc(100vh - 50px);
+  height: 100vh;
+}
+
+body > * {
+  padding: 15px 0 15px 35px;
+}
+
+.content-container {
+  padding-top: 30px;
+}
+
+.header-container {
+  background-color: var(--main-hd-color);
+
+}
+
+.header-container-left {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 43px;
+  padding-right: 25px;
+}
+
+span.text-italic {
+  font-style: italic;
+  color: var(--btn-bg-color-hover);
+}
+
+.todo-container, .header-container-right {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.header-container-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.del-checked-task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px;
+  border-radius: var(--main-bd-radius);
+  border: 2px solid white;
+  background: rgb(255, 134, 112);
+  color: white;
+}
+
+button.del-checked-task:hover {
+  background-color: var(--main-hd-color-hover);
+  cursor: pointer;
+}
+
+span.del-checked-task {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.header-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-btn-container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  background: none;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
+.header-btn-container button:hover {
+  background: rgb(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.header-btn-container button div {
+  height: 30px;
+  width: 30px;
+}
+
+.projects-container {
+  background-color: var(--main-bg-color);
+}
+
+.projects-container label:hover {
+  background-color: var(--main-hv-color);
+  cursor: pointer;
+}
+
+.projects-container li:has(input:checked) {
+  background-color: rgb(222, 184, 135, 0.4);
+  border-radius: 5px;
+}
+
+.projects-group-container {
+  padding-right: 10px;
+}
+
+.project, .title-projects-container {
+  display: grid;
+  grid-template-columns: 24px 1fr 30px;
+  align-items: center;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 8px;
+  border-radius: 5px;
+}
+
+.project {
+  height: 38px;
+}
+
+svg.cross:hover {
+  background-color: var(--main-hv-color);
+  cursor: pointer;
+}
+
+.count, .title-projects-container button:last-child {
+  justify-self: center;
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.title {
+  padding-left: 10px;
+}
+
+.title-projects-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.todo-container .btn-svg {
+  color: rgb(150, 150, 150);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+.todo-container .btn-svg:hover {
+  color: black;
+  background-color: rgb(220,220,220, 1);
+  cursor: pointer;
+}
+
+.task:hover .btn-svg, .todo-header:hover .btn-svg {
+  opacity: 0.6;
+}
+
+.title-projects-title {
+  font-weight: 600;
+}
+
+input, .btn-svg, textarea {
+  border: none;
+  appearance: none;
+  outline: none;
+  background: none;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  position: absolute;
+  left: -100vw;
+}
+
+input.list-title {
+  font-size: 1.2rem;
+}
+
+.list-title-container {
+  display: grid;
+  grid-template-columns: 32px 1fr repeat(3, 25px);
+  grid-template-rows: 30px;
+  align-items: start;
+  padding-top: 7px;
+  margin-bottom: 15px;
+}
+
+.list-title-container svg {
+  margin-left: -1px;
+}
+
+.task {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr repeat(4, 25px);
+  grid-template-rows: 25px 17px 20px;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgb(211, 211, 211, 0.4);
+}
+
+.todo-header:hover, .todo-body:hover {
+  cursor: pointer;
+}
+
+
+.task .task-check {
+  position: absolute;
+  left: -100vw;
+}
+
+.custom-checkbox {
+  --check: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--check);
+  width: var(--check);
+  margin-right: 12px;
+  border: 2px solid rgb(30, 144, 255);
+  background-color: rgb(30, 144, 255, 0.2);
+  border-radius: 50%;
+}
+
+.task label:hover .custom-checkbox {
+  transform: scale(1.1);
+}
+
+.task .task-check + label span.task-text {
+  position: relative;
+  padding-top: 2px;
+}
+
+.task .task-check:checked + label span.task-text:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: rgb(70, 70, 70, 0.6);
+}
+
+.custom-checkbox svg {
+  opacity: 0;
+}
+
+.task .task-check:checked + label svg {
+  opacity: 1;
+}
+
+.task label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.task label:hover {
+  cursor: pointer;
+}
+
+.task-check {
+  appearance: auto;
+}
+
+.task-text {
+  font-size: 0.9rem;
+}
+
+.description-container {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 21px;
+  margin-left: 32px;
+  border-radius: var(--main-bd-radius);
+}
+
+.description-container.expand:hover {
+  outline-offset: 5px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.description-container svg {
+  opacity: 0;
+}
+
+.description-container.expand:hover svg {
+  color: rgb(150,150,150);
+  opacity: 0.6;
+}
+
+p.task-descr {
+  width: 100%;
+  justify-self: start;
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.full-descr {
+  grid-template-rows: 25px auto 20px;
+}
+
+.calendar-container {
+  grid-row: 3 / 4;
+  display: flex;
+  align-items: center;
+  margin-left: 32px;
+}
+
+.task-calendar {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.form-main {
+  padding: 8px 8px;
+  border: 1px solid rgb(200, 200, 200, 0.5);
+  border-radius: 8px;
+}
+
+.modify .form-main:has(input:focus), .modify .form-main:has(textarea:focus), .modify .form-main:has(input.btn-form:hover), .modify .form-main:has(input.btn-form:checked) {
+  border: 1px solid var(--main-hd-color);
+  box-shadow: 0 0 3px 3px rgb(255, 99, 71, 0.3);
+}
+
+.modify .form-save {
+  margin-top: 12px;
+}
+
+.focus {
+  border: 1px solid var(--main-hd-color);
+  box-shadow: 0 0 3px 3px rgb(255, 99, 71, 0.3);
+}
+
+.form-text, .label-params {
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 100%;
+}
+
+.form-descr {
+  font-size: 0.8rem;
+  color: black;
+  resize: none;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.modal button, .modify button, .form-container {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-right: 8px;
+  border: 1px solid var(--main-bd-color);
+  border-radius: var(--main-bd-radius);
+  background: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.form-container label {
+  cursor: pointer;
+}
+
+.form-params {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-project-container, .form-priority-container {
+  position: relative;
+}
+
+div.options-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  border: 1px solid var(--main-bd-color);
+  border-radius: var(--main-bd-radius);
+  padding: 0;
+  background-color: white;
+  z-index: 5;
+}
+
+div.form-priority-container div.priority-input {
+  width: 400%;
+}
+
+.project-input .option, .priority-input .option {
+  font-size: 0.8rem;
+}
+
+.options-container .option:hover {
+  background-color: rgb(240,240,240);
+}
+
+.project-input label, .priority-input label {
+  padding: 5px 7px;
+}
+
+.form-save {
+  display: flex;
+  justify-content: flex-end;
+  cursor: default;
+}
+
+.form-save button {
+  padding: 7px 12px;
+  border: none;
+  letter-spacing: 0.05rem;
+}
+
+.form-save button:last-child {
+  margin-right: 0;
+  background-color: var(--main-hd-color);
+  color: white;
+}
+
+.form-save button:last-child:hover {
+  background-color: var(--main-hd-color-hover);
+}
+
+.form-save button:first-child {
+  background-color: var(--btn-bg-color);
+}
+
+.form-save button:first-child:hover {
+  background-color: var(--btn-bg-color-hover);
+}
+
+.backdrop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  background-color: var(--main-bd-color);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 60%;
+  padding: 15px;
+  border-radius: var(--main-bd-radius);
+  background: white;
+}
+
+.modal .form-main {
+  border: none;
+}
+
+form.new-project {
+  padding: 0;
+}
+
+form.new-project > * {
+  padding: 0;
+  border: none;
+
+}
+
+form.new-project > * > * {
+  padding: 10px 20px;
+}
+
+.modal.new-project {
+  width: 450px;
+}
+
+form.new-project .form-title-wrapper {
+  background-color: rgb(245,245,245);
+  border-radius: var(--main-bd-radius);
+
+}
+
+form.new-project .form-title {
+  border-bottom: 1px solid var(--main-bd-color);
+  padding: 15px 20px;
+  font-weight: 600;
+}
+
+form.new-project .form-text, .modal .label-params {
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+form.new-project input[type="text"], .form-color-container {
+  height: 30px;
+  padding: 5px;
+  border: 1px solid var(--main-bd-color);
+  border-radius: var(--main-bd-radius);
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+form.new-project input[type="text"]:focus {
+  border: 1px solid var(--main-hd-color);
+  box-shadow: 0 0 1px 2px rgb(255, 99, 71, 0.3);
+
+}
+
+form.new-project .form-params {
+  position: relative;
+  align-items: center;
+}
+
+form.new-project label.btn-color {
+  padding: 5px;
+}
+
+form.new-project div.btn-color {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+form.new-project div.btn-color span {
+  padding-top: 1px;
+}
+
+form.new-project .form-color-container {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+form.new-project .form-save {
+  padding: 15px 20px;
+
+}
+
+form.new-project .form-save button {
+  padding: 7px 12px;
+}
+
+form.new-project .options-container {
+  width: 410px;
+  height: 300px;
+  overflow: scroll;
+}
+
+form.new-project .options-container label {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 7px;
+}
+
+form.new-project .options-container label span {
+  display: inline-block;
+  padding-top: 1px;
+}
+
+.hidden {
+  display: none;
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-down {
+  transform: translateY(100%);
+  transition: transform 0.5s;
+}
+
+.fade-up {
+  transform: translateY(-100%);
+  transition: transform 0.5s;
+}
+
+.btn-wrapper label {
+  display: block;
+  padding: 5px 7px;
+}
+
+label.btn-projects > *:not(.hidden), .project-input label, .priority-input label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.form-container:has([type="checkbox"]:checked) {
+  background-color: lightgrey;
+}
+
+input[type="checkbox"]:checked ~ div.options-container {
+  display: block;
+}
+
+.todo-bottom {
+  margin-top: 5px;
+}
+
+.btn-svg-bottom.add-task-bottom {
+  display: flex;
+  opacity: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: grey;
+}
+
+.btn-svg-bottom.add-task-bottom span {
+  display: inline-block;
+  padding-top: 3px;
+}
+
+.btn-svg-bottom.add-task-bottom:hover span {
+  color: var(--main-hd-color);
+  cursor: pointer;
+}
+
+.svg-wrapper.add-task-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+
+  color: var(--main-hd-color);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.btn-svg-bottom.add-task-bottom:hover .svg-wrapper{
+  color: white;
+  background-color: var(--main-hd-color);
+}
+
+input.option + label > svg:last-child {
+  opacity: 0;
+  position: absolute;
+  right: 2%;
+}
+
+input.option:checked + label > svg:last-child {
+  opacity: 1;
+}
