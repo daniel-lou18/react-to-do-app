@@ -1,0 +1,72 @@
+.header-container {
+  background-color: var(--main-hd-color);
+
+}
+
+.header-container-left {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 43px;
+  padding-right: 25px;
+}
+
+span.text-italic {
+  font-style: italic;
+  color: var(--btn-bg-color-hover);
+}
+
+.header-container-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.del-checked-task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px;
+  border-radius: var(--main-bd-radius);
+  border: 2px solid white;
+  background: rgb(255, 134, 112);
+  color: white;
+}
+
+button.del-checked-task:hover {
+  background-color: var(--main-hd-color-hover);
+  cursor: pointer;
+}
+
+span.del-checked-task {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.header-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-btn-container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  background: none;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
+.header-btn-container button:hover {
+  background: rgb(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.header-btn-container button div {
+  height: 30px;
+  width: 30px;
+}
