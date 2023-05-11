@@ -340,7 +340,7 @@ p.task-descr {
 }
 
 div.options-container {
-  display: none;
+  /* display: none; */
   position: absolute;
   top: 100%;
   left: 50%;
@@ -572,9 +572,9 @@ label.btn-projects > *:not(.hidden), .project-input label, .priority-input label
   background-color: lightgrey;
 }
 
-input[type="checkbox"]:checked ~ div.options-container {
+/* input[type="checkbox"]:checked ~ div.options-container {
   display: block;
-}
+} */
 
 .todo-bottom {
   margin-top: 5px;

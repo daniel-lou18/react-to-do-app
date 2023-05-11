@@ -1,26 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProjectsContext } from '../../../context/ProjectsContext';
+import { resetAndSelectProject } from '../../../utils/helpers';
 
 
 const PersonalProjects = () => {
   const { projects, setProjects } = useProjectsContext();
-  const [selectedProject, setSelectedProject] = useState(projects.find(project => project.selected));
+  const [selectedProjectId, setselectedProjectId] = useState();
 
-  const findProject = (projects, id) => projects.find(project => project.id === id);
-  const resetAndSelectProject = (projects, id) => {
-    const updatedProjects = projects.map(project => {
-       project.selected = false;
-       if (project.id === id) project.selected = true;
-       return project
-      });
-    setProjects(updatedProjects)
-  }
+  useEffect(() => {
+    setselectedProjectId(projects.find(project => project.selected).id);
+    console.log(projects)
+  }, [projects])
 
   const selectProjectHandler = e => {
-    setSelectedProject(findProject(projects, e.target.value))
-    resetAndSelectProject(projects, e.target.value);
+    setselectedProjectId(e.target.value)
+    resetAndSelectProject(projects, e.target.value, setProjects);
   }
-
 
   return (
     <div className="personal-projects-container">
@@ -35,7 +30,7 @@ const PersonalProjects = () => {
             id={`sidebar-project-${index}`}
             value={project.id}
             onChange={selectProjectHandler}
-            checked={project.id === selectedProject.id}
+            checked={project.id === selectedProjectId}
           />
           <label className="sidebar-project project" htmlFor={`sidebar-project-${index}`}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={project._color} stroke="none" className="feather feather-circle">
@@ -47,6 +42,7 @@ const PersonalProjects = () => {
         </li>
       ))}
     </div>
+
   )
 }
 
