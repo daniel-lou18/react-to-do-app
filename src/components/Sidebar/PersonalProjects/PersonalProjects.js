@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useProjectsContext } from '../../../context/ProjectsContext';
 import { resetAndSelectProject } from '../../../utils/helpers';
 
 
-const PersonalProjects = () => {
-  const { projects, setProjects } = useProjectsContext();
-  const [selectedProjectId, setselectedProjectId] = useState();
-
-  useEffect(() => {
-    setselectedProjectId(projects.find(project => project.selected).id);
-    console.log(projects)
-  }, [projects])
-
+const PersonalProjects = ({ allProjects, setAllProjects, selectedProjectId, setSelectedProjectId }) => {
   const selectProjectHandler = e => {
-    setselectedProjectId(e.target.value)
-    resetAndSelectProject(projects, e.target.value, setProjects);
+    setSelectedProjectId(e.target.value)
+    resetAndSelectProject(allProjects, e.target.value, setAllProjects);
   }
+
+  const personalProjects = allProjects.slice(1)
 
   return (
     <div className="personal-projects-container">
       <ul className="personal-projects-list"></ul>
-      {projects.length > 0 && projects.map((project, index) => (
+      {personalProjects.length > 0 && personalProjects.map((project, index) => (
         <li key={project.id} className="sidebar-project sidebar-personal" data-id={project.id}>
           <input
             className="sidebar-project"

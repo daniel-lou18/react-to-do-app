@@ -5,7 +5,7 @@ import { useProjectsContext } from '../../../../context/ProjectsContext';
 import { resetAndSelectProject } from '../../../../utils/helpers';
 
 const NewProjectModal = ({showModal, setShowModal}) => {
-  const { projects, setProjects } = useProjectsContext();
+  const { allProjects, setAllProjects } = useProjectsContext();
   const [projectColor, setProjectColor] = useState('grey');
   const [showColorMenu, setShowColorMenu] = useState(false);
   const [projectName, setProjectName] = useState('');
@@ -19,10 +19,12 @@ const NewProjectModal = ({showModal, setShowModal}) => {
     setProjectColor('grey')
   }
 
-  const createProject = () => {
+  const createProject = (e) => {
+    e.preventDefault();
+    if (!projectName) return alert("Please fill in a name for your project")
     const newProject = new PersonalProject(projectName, projectColor, null, false);
-    projects.push(newProject)
-    resetAndSelectProject(projects, newProject.id, setProjects);
+    allProjects.push(newProject)
+    resetAndSelectProject(allProjects, newProject.id, setAllProjects);
     closeModal()
   }
 

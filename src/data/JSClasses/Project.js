@@ -48,7 +48,6 @@ const Project = class {
 
   set selected(newStatus) {
     this._selected = newStatus;
-    return this;
   }
 
 };
