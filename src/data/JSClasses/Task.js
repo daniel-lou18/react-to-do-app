@@ -12,7 +12,23 @@ const Task = class {
     this.setPriorityColorName();
     this.setPriorityBackgroundColor();
   }
-  
+
+  get taskName() {
+    return this._taskName;
+  }
+
+  set taskName(newName) {
+    this._taskName = newName;
+  }
+
+  get descr() {
+    return this._descr;
+  }
+
+  set descr(newDescr) {
+    this._descr = newDescr;
+  }
+
   message() {
     console.log('New Task created')
   }

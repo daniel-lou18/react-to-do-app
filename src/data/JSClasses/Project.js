@@ -50,6 +50,10 @@ const Project = class {
     this._selected = newStatus;
   }
 
+  get color() {
+    return this._color
+  }
+
 };
 
 const PersonalProject = class extends Project {
