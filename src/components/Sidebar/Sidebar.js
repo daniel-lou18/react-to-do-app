@@ -3,7 +3,6 @@ import HeaderPersProjects from './HeaderPersProjects';
 import PersonalProjects from './PersonalProjects';
 import { useProjectsContext } from '../../context/ProjectsContext';
 import { useState, useEffect } from 'react';
-// import { resetAndSelectProject } from '../../utils/helpers';
 
 const Sidebar = () => {
   const { allProjects, setAllProjects } = useProjectsContext();
@@ -11,8 +10,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     setSelectedProjectId(allProjects.find(project => project.selected).id);
-    console.log(selectedProjectId)
-    console.log(allProjects)
   }, [selectedProjectId, allProjects])
 
   return (
