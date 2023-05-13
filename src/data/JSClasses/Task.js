@@ -29,6 +29,14 @@ const Task = class {
     this._descr = newDescr;
   }
 
+  get priority() {
+    return this._priority
+  }
+
+  set priority(newPriority) {
+    this._priority = newPriority;
+  }
+
   message() {
     console.log('New Task created')
   }

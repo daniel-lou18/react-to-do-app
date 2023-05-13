@@ -64,14 +64,14 @@ const NewProjectModal = ({showModal, setShowModal}) => {
                 onChange={() => setShowColorMenu(!showColorMenu)}
                 />
                 <div className="btn-wrapper form-color">
-                <label className="btn-color" htmlFor="btn-proj-color">
-                  <div className="btn-color">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill={projectColor} stroke={projectColor} className="custom-color feather feather-circle">
-                      <circle cx="10" cy="10" r="5"/>
-                    </svg>
-                    <span className="form-color">{projectColor}</span>
-                  </div>
-                </label>
+                  <label className="btn-color" htmlFor="btn-proj-color">
+                    <div className="btn-color">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill={projectColor} stroke={projectColor} className="custom-color feather feather-circle">
+                        <circle cx="10" cy="10" r="5"/>
+                      </svg>
+                      <span className="form-color">{projectColor}</span>
+                    </div>
+                  </label>
                 </div>
                 <ProjectColorsList showColorMenu={showColorMenu} setShowColorMenu={setShowColorMenu} projectColor={projectColor} setProjectColor={setProjectColor} />
               </div>
