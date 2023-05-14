@@ -5,18 +5,16 @@ import { useProjectsContext } from '../../../context/ProjectsContext';
 
 const Content = () => {
   const { allProjects, setAllProjects } = useProjectsContext();
-  const [selectedProject, setSelectedProject] = useState();
-
+  const [selectedProject, setSelectedProject] = useState(allProjects.find(project => project.selected))
 
   useEffect(() => {
-    setSelectedProject(allProjects.find(project => project.selected));
-    console.log(selectedProject)
+    setSelectedProject(allProjects.find(project => project.selected))
   }, [selectedProject, allProjects])
 
   return (
     <div className='todo-container content-container'>
-      <Header allProjects={allProjects} setAllProjects={setAllProjects} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
-      <Tasks allProjects={allProjects} setAllProjects={setAllProjects} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
+      <Header allProjects={allProjects} setAllProjects={setAllProjects} />
+      <Tasks selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
     </div>
   )
 }

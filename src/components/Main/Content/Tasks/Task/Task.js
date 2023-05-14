@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import EditTaskModal from './EditTaskModal';
 
-const Task = ({ allProjects, setAllProjects, selectedProject, setSelectedProject, idx }) => {
+const Task = ({ selectedProject, setSelectedProject, idx }) => {
   const [isChecked, setisChecked] = useState(false);
-  const task = selectedProject.tasks[idx];
+  const task = selectedProject?.tasks[idx];
   const color = task._priorityColor;
   const backgroundColor = task._priorityBackgroundColor;
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
@@ -49,7 +49,7 @@ const Task = ({ allProjects, setAllProjects, selectedProject, setSelectedProject
           <p className="task-calendar">19 oct</p>
         </div>
       </div>)}
-      < EditTaskModal task={task} showEditTaskModal={showEditTaskModal} allProjects={allProjects} setAllProjects={setAllProjects}/>
+      {showEditTaskModal && (< EditTaskModal idx={idx} showEditTaskModal={showEditTaskModal} selectedProject={selectedProject} setSelectedProject={setSelectedProject}/>)}
     </div>
   )
 }

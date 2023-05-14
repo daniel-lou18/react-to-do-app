@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProjectsList from './ProjectsList';
 
-const EditTaskModal = ({ task: { taskName, descr, priority}, showEditTaskModal, allProjects, setAllProjects }) => {
-  const [taskNameText, setTaskName] = useState(taskName);
-  const [description, setDescription] = useState(descr);
-  const [priorityLevel, setPriorityLevel] = useState(priority);
-
-  if (!showEditTaskModal) return
+const EditTaskModal = ({ idx, selectedProject, setSelectedProject }) => {
+  const task = selectedProject.tasks[idx]
+  const [taskNameText, setTaskName] = useState(task.taskName);
+  const [description, setDescription] = useState(task.descr);
+  const [priorityLevel, setPriorityLevel] = useState(task._priorityColor);
 
   return (
     <form className="task-form modify" id="task-modify">
@@ -57,7 +56,7 @@ const EditTaskModal = ({ task: { taskName, descr, priority}, showEditTaskModal, 
                 </div>
               </label>
           </div>
-          <ProjectsList allProjects={allProjects} setAllProjects={setAllProjects} />
+          <ProjectsList selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
         </div>
         <div className="form-priority-container form-container">
         <input type="checkbox" className="btn-form" name="btn-priority" id="btn-priority" />
