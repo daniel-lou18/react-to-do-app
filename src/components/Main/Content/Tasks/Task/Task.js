@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
 
 const Task = ({ selectedProject, setSelectedProject, idx }) => {
@@ -49,7 +49,7 @@ const Task = ({ selectedProject, setSelectedProject, idx }) => {
           <p className="task-calendar">19 oct</p>
         </div>
       </div>)}
-      {showEditTaskModal && (< EditTaskModal idx={idx} showEditTaskModal={showEditTaskModal} selectedProject={selectedProject} setSelectedProject={setSelectedProject}/>)}
+      {showEditTaskModal && (<EditTaskModal idx={idx} showEditTaskModal={showEditTaskModal} setShowEditTaskModal={setShowEditTaskModal} selectedProject={selectedProject} setSelectedProject={setSelectedProject}/>)}
     </div>
   )
 }

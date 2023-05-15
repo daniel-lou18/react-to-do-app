@@ -1,14 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ProjectsList from './ProjectsList';
+import PriorityList from './PriorityList';
+import { projectIcon } from '../../../../../../utils/helpers';
+import useClickOutside from '../../../../../../hooks/useClickOutside';
 
-const EditTaskModal = ({ idx, selectedProject, setSelectedProject }) => {
+const EditTaskModal = ({ idx, selectedProject, showEditTaskModal, setShowEditTaskModal }) => {
   const task = selectedProject.tasks[idx]
   const [taskNameText, setTaskName] = useState(task.taskName);
   const [description, setDescription] = useState(task.descr);
-  const [priorityLevel, setPriorityLevel] = useState(task._priorityColor);
+  const [projectSelection, setProjectSelection] = useState(selectedProject);
+  const [showProjectsList, setShowProjectsList] = useState(false);
+  const [btnIcon, setBtnIcon] = useState(projectIcon(selectedProject));
+  const [prioritySelection, setPrioritySelection] = useState(task._priority);
+  const [showPriorityList, setShowPriorityList] = useState(false);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    const outsideClickHandler = e => {
+      if (e.target.closest('.options-container')) return
+      if (ref.current && !ref.current.contains(e.target)) setShowEditTaskModal(false)
+    }
+    document.addEventListener('click', outsideClickHandler)
+
+    return () => document.removeEventListener('click', outsideClickHandler)
+
+  })
+
+  useEffect(() => {
+    setBtnIcon(projectIcon(projectSelection))
+  }, [projectSelection])
 
   return (
-    <form className="task-form modify" id="task-modify">
+    <form ref={ref} className="task-form modify" id="task-modify">
       <div className="form-main">
       <div className="form-text">
       <input
@@ -45,21 +69,33 @@ const EditTaskModal = ({ idx, selectedProject, setSelectedProject }) => {
         <span className="form-date">19 oct</span>
         </button>
         <div className="form-project-container form-container">
-          <input type="checkbox" className="btn-form" name="btn-projects" id="btn-projects" />
+          <input
+            type="checkbox"
+            className="btn-form"
+            name="btn-projects"
+            id="btn-projects"
+            checked={showProjectsList}
+            onChange={() => setShowProjectsList(!showProjectsList)}
+          />
           <div className="btn-wrapper form-project">
               <label className="btn-projects" htmlFor="btn-projects">
                 <div className="btn-pers-proj">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="cornflowerblue" stroke="none" className="list-dot feather feather-circle">
-                    <circle cx="12" cy="12" r="5"/>
-                  </svg>
-                  <span className="form-project">Courses</span>
+                  {btnIcon}
+                  <span className="form-project">{projectSelection.capitalizedProjectName}</span>
                 </div>
               </label>
           </div>
-          <ProjectsList selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
+          {showProjectsList && <ProjectsList projectSelection={projectSelection} setProjectSelection={setProjectSelection} setShowProjectsList={setShowProjectsList}/>}
         </div>
         <div className="form-priority-container form-container">
-        <input type="checkbox" className="btn-form" name="btn-priority" id="btn-priority" />
+        <input
+          type="checkbox"
+          className="btn-form"
+          name="btn-priority"
+          id="btn-priority"
+          checked={showPriorityList}
+          onChange={() => setShowPriorityList(!showPriorityList)}
+        />
         <div className="btn-wrapper form-priority">
           <label className="btn-priority" htmlFor="btn-priority">
             <div className="btn-priority">
@@ -70,10 +106,7 @@ const EditTaskModal = ({ idx, selectedProject, setSelectedProject }) => {
             </div>
           </label>
         </div>
-        <div className="priority-input options-container">
-        <ul className="priority-input list">
-        </ul>
-        </div>
+        {showPriorityList && <PriorityList prioritySelection={prioritySelection} setPrioritySelection={setPrioritySelection} setShowPriorityList={setShowPriorityList} />}
         </div>
       </div>
       </div>
