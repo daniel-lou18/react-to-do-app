@@ -6,9 +6,10 @@ export const ProjectsContext = createContext();
 const ProjectsProvider = (props) => {
   const [projects, setProjects] = useState(personalProjectsData);
   const [allProjects, setAllProjects] = useState(allProjectsData);
+  const [shouldUpdate, setShouldUpdate] = useState(false)
 
   return (
-      <ProjectsContext.Provider value={ { projects, setProjects, allProjects, setAllProjects }}>
+      <ProjectsContext.Provider value={ { projects, setProjects, allProjects, setAllProjects, shouldUpdate, setShouldUpdate }}>
         {props.children}
       </ProjectsContext.Provider>
   )

@@ -21,3 +21,25 @@ export const projectIcon = (selectedProject) => {
   const icon = selectedProject.constructor.name === 'PersonalProject' ? personalProjectIcon : defaultProjectIcon;
   return icon;
 }
+
+export const priorityNumToColor = num => {
+  let color;
+  switch (num) {
+    case 1:
+      color = 'rgb(220, 20, 60)';
+      break;
+    case 2:
+      color = 'rgb(255, 140, 0)';
+      break;
+    case 3:
+      color = 'rgb(100, 149, 237)';
+      break;
+    case 4:
+      color = 'rgb(175, 175, 175)';
+      break;
+    default:
+      color = 'rgb(175, 175, 175)'
+      break;
+  }
+  return color;
+}

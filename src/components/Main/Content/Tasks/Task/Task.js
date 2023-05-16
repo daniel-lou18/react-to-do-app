@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
 
-const Task = ({ selectedProject, setSelectedProject, idx }) => {
+const Task = ({ selectedProject, idx }) => {
   const [isChecked, setisChecked] = useState(false);
-  const task = selectedProject?.tasks[idx];
+  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+
+  const task = selectedProject.tasks[idx];
+  if (!task) return
   const color = task._priorityColor;
   const backgroundColor = task._priorityBackgroundColor;
-  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+
 
   return (
     <div className="task-wrapper">
@@ -49,7 +52,7 @@ const Task = ({ selectedProject, setSelectedProject, idx }) => {
           <p className="task-calendar">19 oct</p>
         </div>
       </div>)}
-      {showEditTaskModal && (<EditTaskModal idx={idx} showEditTaskModal={showEditTaskModal} setShowEditTaskModal={setShowEditTaskModal} selectedProject={selectedProject} setSelectedProject={setSelectedProject}/>)}
+      {showEditTaskModal && (<EditTaskModal idx={idx} showEditTaskModal={showEditTaskModal} setShowEditTaskModal={setShowEditTaskModal} selectedProject={selectedProject} />)}
     </div>
   )
 }

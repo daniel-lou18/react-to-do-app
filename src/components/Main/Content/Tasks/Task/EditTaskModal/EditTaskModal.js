@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import TaskName from './TaskName';
+import TaskDescription from './TaskDescription';
 import ProjectsList from './ProjectsList';
 import PriorityList from './PriorityList';
-import { projectIcon } from '../../../../../../utils/helpers';
-import useClickOutside from '../../../../../../hooks/useClickOutside';
+import SaveTaskBtn from './SaveTaskBtn';
+import { projectIcon, priorityNumToColor } from '../../../../../../utils/helpers';
 
-const EditTaskModal = ({ idx, selectedProject, showEditTaskModal, setShowEditTaskModal }) => {
+const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
   const task = selectedProject.tasks[idx]
   const [taskNameText, setTaskName] = useState(task.taskName);
   const [description, setDescription] = useState(task.descr);
@@ -14,17 +16,29 @@ const EditTaskModal = ({ idx, selectedProject, showEditTaskModal, setShowEditTas
   const [prioritySelection, setPrioritySelection] = useState(task._priority);
   const [showPriorityList, setShowPriorityList] = useState(false);
 
-  const ref = useRef();
+  const refTaskModal = useRef();
+  const refProjectBtn = useRef();
+  const refPriorityBtn = useRef();
 
   useEffect(() => {
     const outsideClickHandler = e => {
       if (e.target.closest('.options-container')) return
-      if (ref.current && !ref.current.contains(e.target)) setShowEditTaskModal(false)
+      if (refTaskModal.current && !refTaskModal.current.contains(e.target)) setShowEditTaskModal(false)
     }
     document.addEventListener('click', outsideClickHandler)
 
     return () => document.removeEventListener('click', outsideClickHandler)
 
+  });
+
+  useEffect(() => {
+    const outsideClickHandler = e => {
+      if (refProjectBtn.current && !refProjectBtn.current.contains(e.target)) setShowProjectsList(false)
+      if (refPriorityBtn.current && !refPriorityBtn.current.contains(e.target)) setShowPriorityList(false)
+    }
+    document.addEventListener('click', outsideClickHandler)
+
+    return () => document.removeEventListener('click', outsideClickHandler)
   })
 
   useEffect(() => {
@@ -32,35 +46,10 @@ const EditTaskModal = ({ idx, selectedProject, showEditTaskModal, setShowEditTas
   }, [projectSelection])
 
   return (
-    <form ref={ref} className="task-form modify" id="task-modify">
+    <form ref={refTaskModal} className="task-form modify" id="task-modify">
       <div className="form-main">
-      <div className="form-text">
-      <input
-        className="form-text"
-        type="text"
-        name="task-text"
-        id="task-modify"
-        placeholder="Tâche"
-        minLength="1"
-        maxLength="60"
-        value={taskNameText}
-        onChange={e => setTaskName(e.target.value)}
-      />
-      </div>
-      <div className="form-descr">
-      <textarea
-        className="form-descr"
-        name="descr-1"
-        id="descr-modify"
-        cols="30"
-        rows="4"
-        placeholder="Description"
-        maxLength="300"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      >
-      </textarea>
-      </div>
+      <TaskName taskNameText={taskNameText} setTaskName={setTaskName} />
+      <TaskDescription description={description} setDescription={setDescription} />
       <div className="form-params">
         <button type="button" className="form-date form-container">
         <svg className="form-date" style={{width:15, height:15}} viewBox="0 0 24 24">
@@ -68,14 +57,17 @@ const EditTaskModal = ({ idx, selectedProject, showEditTaskModal, setShowEditTas
         </svg>
         <span className="form-date">19 oct</span>
         </button>
-        <div className="form-project-container form-container">
+        <div ref={refProjectBtn} className="form-project-container form-container">
           <input
             type="checkbox"
             className="btn-form"
             name="btn-projects"
             id="btn-projects"
             checked={showProjectsList}
-            onChange={() => setShowProjectsList(!showProjectsList)}
+            onChange={() => {
+              setShowProjectsList(!showProjectsList)
+              setShowPriorityList(false)
+            }}
           />
           <div className="btn-wrapper form-project">
               <label className="btn-projects" htmlFor="btn-projects">
@@ -87,32 +79,35 @@ const EditTaskModal = ({ idx, selectedProject, showEditTaskModal, setShowEditTas
           </div>
           {showProjectsList && <ProjectsList projectSelection={projectSelection} setProjectSelection={setProjectSelection} setShowProjectsList={setShowProjectsList}/>}
         </div>
-        <div className="form-priority-container form-container">
-        <input
-          type="checkbox"
-          className="btn-form"
-          name="btn-priority"
-          id="btn-priority"
-          checked={showPriorityList}
-          onChange={() => setShowPriorityList(!showPriorityList)}
-        />
-        <div className="btn-wrapper form-priority">
-          <label className="btn-priority" htmlFor="btn-priority">
-            <div className="btn-priority">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="crimson" stroke="crimson" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="form-priority custom-color feather feather-flag">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
-              </svg>
-              <span className="form-priority"></span>
-            </div>
-          </label>
-        </div>
-        {showPriorityList && <PriorityList prioritySelection={prioritySelection} setPrioritySelection={setPrioritySelection} setShowPriorityList={setShowPriorityList} />}
+        <div ref={refPriorityBtn} className="form-priority-container form-container">
+          <input
+            type="checkbox"
+            className="btn-form"
+            name="btn-priority"
+            id="btn-priority"
+            checked={showPriorityList}
+            onChange={() => {
+              setShowPriorityList(!showPriorityList)
+              setShowProjectsList(false)
+            }}
+          />
+          <div className="btn-wrapper form-priority">
+            <label className="btn-priority" htmlFor="btn-priority">
+              <div className="btn-priority">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill={priorityNumToColor(prioritySelection)} stroke={priorityNumToColor(prioritySelection)} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="form-priority custom-color feather feather-flag">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
+                </svg>
+                <span className="form-priority"></span>
+              </div>
+            </label>
+          </div>
+          {showPriorityList && <PriorityList prioritySelection={prioritySelection} setPrioritySelection={setPrioritySelection} setShowPriorityList={setShowPriorityList} />}
         </div>
       </div>
       </div>
       <div className="form-save">
       <button className="cancel-new-task" type="button">Annnuler</button>
-      <button className="save-new-task">Enregistrer</button>
+      <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} idx={idx} taskNameText={taskNameText} description={description} prioritySelection={prioritySelection} setShowEditTaskModal={setShowEditTaskModal} />
       </div>
         </form>
   )
