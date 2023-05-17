@@ -1,8 +1,8 @@
 import Content from './Content';
 
-const Main = () => {
+const Main = ({ showAddTask, setShowAddTask }) => {
   return (
-    <Content />
+    <Content showAddTask={showAddTask} setShowAddTask={setShowAddTask} />
   )
 }
 

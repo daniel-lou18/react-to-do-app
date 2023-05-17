@@ -1,7 +1,4 @@
-import { resetAndSelectProject } from "../../../../utils/helpers";
-import { useState } from 'react';
-
-const Header = ({ allProjects, setAllProjects }) => {
+const Header = ({ allProjects, setAllProjects, showAddTask, setShowAddTask }) => {
   const selectedProject = allProjects.find(project => project.selected)
   if (!selectedProject) return
 
@@ -19,7 +16,7 @@ const Header = ({ allProjects, setAllProjects }) => {
         id="list-title-1"
         value={selectedProject.capitalizedProjectName}
       />
-      <button className="btn-svg list-actions add-task">
+      <button className="btn-svg list-actions add-task" onClick={() => setShowAddTask(!showAddTask)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="todo-header-add cross feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </button>
       <button className="btn-svg list-actions edit-project">
