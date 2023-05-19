@@ -1,16 +1,22 @@
 import TaskName from '../../forms/inputs/TaskName';
 import TaskDescription from '../../forms/inputs/TaskDescription/TaskDescription';
 import ProjectChoiceBtn from '../../forms/buttons/ProjectChoiceBtn/ProjectChoiceBtn';
-import { useState } from 'react';
+import ProjectsList from '../../forms/buttons/ProjectChoiceBtn/ProjectsList/ProjectsList';
+import { projectIcon } from '../../../utils/helpers';
+import { useState, useEffect } from 'react';
 
 const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProject }) => {
   const [taskNameText, setTaskName] = useState();
   const [description, setDescription] = useState();
   const [projectSelection, setProjectSelection] = useState(selectedProject);
   const [showProjectsList, setShowProjectsList] = useState(false);
-  const [btnIcon, setBtnIcon] = useState();
+  const [btnIcon, setBtnIcon] = useState(projectIcon(selectedProject));
   const [showPriorityList, setShowPriorityList] = useState(false);
 
+
+  useEffect(() => {
+    setBtnIcon(projectIcon(projectSelection))
+  }, [projectSelection])
 
   const closeModal = () => {
     setShowAddTask(false)
@@ -31,20 +37,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
             </button>
             <div className="form-project-container form-container">
               <ProjectChoiceBtn showProjectsList={showProjectsList} setShowProjectsList={setShowProjectsList} showPriorityList={showPriorityList} setShowPriorityList={setShowPriorityList} projectSelection={projectSelection} btnIcon={btnIcon} />
-              <div className="project-input options-container">
-              <ul className="project-input list">
-                <li className="project-input option inbox">
-              <input className="project-option option" type="radio" name="project-option" data-id= "this.projects[0].id" id="inbox" value="inbox" checked />
-              <label for="inbox">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" className="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
-                  <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
-                </svg>
-                <span className="inbox-title">Inbox</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" className="feather feather-check"><polyline points="20 6 9 17 4 12"/></svg>
-              </label>
-                </li>
-              </ul>
-              </div>
+              {showProjectsList && <ProjectsList projectSelection={projectSelection} setProjectSelection={setProjectSelection} setShowProjectsList={setShowProjectsList}/>}
             </div>
             <div className="form-priority-container form-container">
             <input type="checkbox" className="btn-form" data-id="" name="btn-priority" id="btn-priority" />
