@@ -2,6 +2,8 @@ import TaskName from '../../forms/inputs/TaskName';
 import TaskDescription from '../../forms/inputs/TaskDescription/TaskDescription';
 import ProjectChoiceBtn from '../../forms/buttons/ProjectChoiceBtn/ProjectChoiceBtn';
 import ProjectsList from '../../forms/buttons/ProjectChoiceBtn/ProjectsList/ProjectsList';
+import PriorityChoiceBtn from '../../forms/buttons/PriorityChoiceBtn/PriorityChoiceBtn';
+import PriorityList from '../../forms/buttons/PriorityChoiceBtn/PriorityList/PriorityList';
 import { projectIcon } from '../../../utils/helpers';
 import { useState, useEffect } from 'react';
 
@@ -11,6 +13,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
   const [projectSelection, setProjectSelection] = useState(selectedProject);
   const [showProjectsList, setShowProjectsList] = useState(false);
   const [btnIcon, setBtnIcon] = useState(projectIcon(selectedProject));
+  const [prioritySelection, setPrioritySelection] = useState(1);
   const [showPriorityList, setShowPriorityList] = useState(false);
 
 
@@ -40,21 +43,8 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
               {showProjectsList && <ProjectsList projectSelection={projectSelection} setProjectSelection={setProjectSelection} setShowProjectsList={setShowProjectsList}/>}
             </div>
             <div className="form-priority-container form-container">
-            <input type="checkbox" className="btn-form" data-id="" name="btn-priority" id="btn-priority" />
-            <div className="btn-wrapper form-priority">
-              <label className="btn-priority" for="btn-priority">
-            <div className="btn-priority">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="crimson" stroke="crimson" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" className="form-priority custom-color feather feather-flag">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
-              </svg>
-              <span className="form-priority"></span>
-            </div>
-              </label>
-            </div>
-            <div className="priority-input options-container">
-            <ul className="priority-input list">
-            </ul>
-            </div>
+              <PriorityChoiceBtn showPriorityList={showPriorityList} setShowPriorityList={setShowPriorityList} setShowProjectsList={setShowProjectsList} prioritySelection={prioritySelection}/>
+              {showPriorityList && <PriorityList prioritySelection={prioritySelection} setPrioritySelection={setPrioritySelection} setShowPriorityList={setShowPriorityList} />}
             </div>
           </div>
         </div>
