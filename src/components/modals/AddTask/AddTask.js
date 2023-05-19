@@ -25,13 +25,19 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
     setShowAddTask(false)
   }
 
+  const closeMenus = e => {
+    e.stopPropagation();
+    setShowProjectsList(false);
+    setShowPriorityList(false);
+  }
+
   return (
     <div class="backdrop" onClick={closeModal}>
-      <form className="task-form modal new-task" id="task-0" onClick={e => e.stopPropagation()}>
+      <form className="task-form modal new-task" id="task-0" onClick={closeMenus}>
         <div className="form-main">
           <TaskName taskNameText={taskNameText} setTaskName={setTaskName}/>
           <TaskDescription description={description} setDescription={setDescription} />
-          <div className="form-params">
+          <div className="form-params" onClick={e => e.stopPropagation()}>
             <button type="button" className="form-date form-container">
             <svg className="form-date" style={{width:15, height:15}} viewBox="0 0 24 24">
             <path fill="currentColor" d="M19 3C20.11 3 21 3.89 21 5V19C21 20.11 20.11 21 19 21H5C3.89 21 3 20.1 3 19V5C3 3.89 3.9 3 5 3H6V1H8V3H16V1H18V3H19M19 19V9H5V19H19M19 7V5H5V7H19M7 11H9V17H7V11" />
@@ -49,7 +55,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
           </div>
         </div>
         <div className="form-save">
-          <button className="cancel-new-task cancel" type="button">Annnuler</button>
+          <button className="cancel-new-task cancel" type="button" onClick={closeModal}>Annnuler</button>
           <button className="save-new-task save">Enregistrer</button>
         </div>
       </form>
