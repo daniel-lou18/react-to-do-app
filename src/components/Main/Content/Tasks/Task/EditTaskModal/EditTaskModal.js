@@ -106,8 +106,8 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
       </div>
       </div>
       <div className="form-save">
-      <button className="cancel-new-task" type="button">Annnuler</button>
-      <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} idx={idx} taskNameText={taskNameText} description={description} prioritySelection={prioritySelection} setShowEditTaskModal={setShowEditTaskModal} />
+        <button className="cancel-new-task" type="button" onClick={() => setShowEditTaskModal(false)}>Annnuler</button>
+        <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} idx={idx} taskNameText={taskNameText} description={description} prioritySelection={prioritySelection} setShowEditTaskModal={setShowEditTaskModal} />
       </div>
         </form>
   )

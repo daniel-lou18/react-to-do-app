@@ -5,6 +5,7 @@ import ProjectsList from '../../forms/buttons/ProjectChoiceBtn/ProjectsList/Proj
 import PriorityChoiceBtn from '../../forms/buttons/PriorityChoiceBtn/PriorityChoiceBtn';
 import PriorityList from '../../forms/buttons/PriorityChoiceBtn/PriorityList/PriorityList';
 import { projectIcon } from '../../../utils/helpers';
+import SaveTaskBtn from '../../forms/buttons/SaveTaskBtn/SaveTaskBtn';
 import { useState, useEffect } from 'react';
 
 const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProject }) => {
@@ -56,7 +57,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
         </div>
         <div className="form-save">
           <button className="cancel-new-task cancel" type="button" onClick={closeModal}>Annnuler</button>
-          <button className="save-new-task save">Enregistrer</button>
+          <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} taskNameText={taskNameText} description={description} prioritySelection={prioritySelection} setShowAddTask={setShowAddTask} />
         </div>
       </form>
     </div>
