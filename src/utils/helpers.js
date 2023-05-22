@@ -43,3 +43,10 @@ export const priorityNumToColor = num => {
   }
   return color;
 }
+
+export const resetStrikethroughAllTasks = projects => {
+  projects.forEach(project => project.tasks.forEach(task => {
+    task.strikethrough = false
+  }))
+  console.log(projects);
+}

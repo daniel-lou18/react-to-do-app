@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
+import TaskNameMain from '../../../../UI-Elements/inputs/TaskNameMain/TaskNameMain';
 import DelTaskBtn from '../../../../UI-Elements/buttons/DelTaskBtn';
 
 const Task = ({ selectedProject, idx }) => {
@@ -15,19 +16,7 @@ const Task = ({ selectedProject, idx }) => {
   return (
     <div className="task-wrapper">
       {!showEditTaskModal && (<div className="task">
-        <input
-          className="task-check"
-          type="checkbox"
-          id={task.id}
-          checked={isChecked}
-          onChange={() => setisChecked(!isChecked)}
-        />
-        <label className="task-label" htmlFor={task.id}>
-          <span style={{borderColor: color, backgroundColor: backgroundColor}} className="custom-checkbox">
-            <svg className="feather feather-check" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="3" strokeLinecap="square" strokeLinejoin="square"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span className="task-text">{task.taskName}</span>
-        </label>
+        <TaskNameMain task={task} isChecked={isChecked} setisChecked={setisChecked} color={color} backgroundColor={backgroundColor} />
         <button className="btn-svg list-actions move move-up">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-up"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
         </button>

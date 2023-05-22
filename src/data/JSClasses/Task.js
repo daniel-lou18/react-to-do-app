@@ -7,6 +7,7 @@ const Task = class {
     this._deadline = deadline;
     this._project = project;
     this._priority = priority;
+    this._strikethrough = false;
     this.message();
     this.setPriorityColor();
     this.setPriorityColorName();
@@ -35,6 +36,14 @@ const Task = class {
 
   set priority(newPriority) {
     this._priority = newPriority;
+  }
+
+  get strikethrough() {
+    return this._strikethrough;
+  }
+
+  set strikethrough(newStatus) {
+    this._strikethrough = newStatus;
   }
 
   message() {

@@ -1,8 +1,8 @@
 import Content from './Content';
 
-const Main = ({ showAddTask, setShowAddTask }) => {
+const Main = ({ selectedProject, setSelectedProject, showAddTask, setShowAddTask }) => {
   return (
-    <Content showAddTask={showAddTask} setShowAddTask={setShowAddTask} />
+    <Content showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
   )
 }
 
