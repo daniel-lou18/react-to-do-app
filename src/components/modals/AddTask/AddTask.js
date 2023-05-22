@@ -1,11 +1,11 @@
-import TaskName from '../../forms/inputs/TaskName';
-import TaskDescription from '../../forms/inputs/TaskDescription/TaskDescription';
-import ProjectChoiceBtn from '../../forms/buttons/ProjectChoiceBtn/ProjectChoiceBtn';
-import ProjectsList from '../../forms/buttons/ProjectChoiceBtn/ProjectsList/ProjectsList';
-import PriorityChoiceBtn from '../../forms/buttons/PriorityChoiceBtn/PriorityChoiceBtn';
-import PriorityList from '../../forms/buttons/PriorityChoiceBtn/PriorityList/PriorityList';
+import TaskName from '../../UI-Elements/inputs/TaskName';
+import TaskDescription from '../../UI-Elements/inputs/TaskDescription/TaskDescription';
+import ProjectChoiceBtn from '../../UI-Elements/buttons/ProjectChoiceBtn/ProjectChoiceBtn';
+import ProjectsList from '../../UI-Elements/buttons/ProjectChoiceBtn/ProjectsList/ProjectsList';
+import PriorityChoiceBtn from '../../UI-Elements/buttons/PriorityChoiceBtn/PriorityChoiceBtn';
+import PriorityList from '../../UI-Elements/buttons/PriorityChoiceBtn/PriorityList/PriorityList';
 import { projectIcon } from '../../../utils/helpers';
-import SaveTaskBtn from '../../forms/buttons/SaveTaskBtn/SaveTaskBtn';
+import SaveTaskBtn from '../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
 import { useState, useEffect } from 'react';
 
 const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProject }) => {

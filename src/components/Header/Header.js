@@ -1,6 +1,6 @@
 import React from 'react';
-import RemoveTaskBigBtn from './RemoveTaskBigBtn';
-import AddTaskBigBtn from './AddTaskBigBtn';
+import RemoveTaskBigBtn from '../UI-Elements/buttons/RemoveTaskBigBtn';
+import AddTaskBigBtn from '../UI-Elements/buttons/AddTaskBigBtn';
 import './Header.css';
 
 const Header = ({ showAddTask, setShowAddTask }) => {

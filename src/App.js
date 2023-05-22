@@ -7,12 +7,13 @@ import { useProjectsContext } from './context/ProjectsContext';
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
-  const { allProjects, setAllProjects } = useProjectsContext();
+  const { allProjects, shouldUpdate, setShouldUpdate } = useProjectsContext();
   const [selectedProject, setSelectedProject] = useState(allProjects.find(project => project.selected))
 
   useEffect(() => {
-    setSelectedProject(allProjects.find(project => project.selected))
-  }, [selectedProject, allProjects])
+    setSelectedProject(allProjects.find(project => project.selected));
+    setShouldUpdate(false);
+  }, [selectedProject, allProjects, shouldUpdate, setShouldUpdate])
 
   return (
     <>

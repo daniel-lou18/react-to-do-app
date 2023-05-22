@@ -5,13 +5,12 @@ import { useProjectsContext } from '../../context/ProjectsContext';
 import { useState, useEffect } from 'react';
 
 const Sidebar = () => {
-  const { allProjects, setAllProjects, shouldUpdate, setShouldUpdate } = useProjectsContext();
+  const { allProjects, setAllProjects } = useProjectsContext();
   const [selectedProjectId, setSelectedProjectId] = useState();
 
   useEffect(() => {
     setSelectedProjectId(allProjects.find(project => project.selected).id);
-    setShouldUpdate(false);
-  }, [selectedProjectId, allProjects, shouldUpdate, setShouldUpdate])
+  }, [selectedProjectId, allProjects])
 
   return (
     <div className="projects-container content-container">

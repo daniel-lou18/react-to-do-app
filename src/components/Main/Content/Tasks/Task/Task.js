@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
-import DelTaskBtn from '../../../../forms/buttons/DelTaskBtn';
+import DelTaskBtn from '../../../../UI-Elements/buttons/DelTaskBtn';
 
 const Task = ({ selectedProject, idx }) => {
   const [isChecked, setisChecked] = useState(false);
