@@ -6,7 +6,7 @@ const Tasks = ({ selectedProject, setSelectedProject }) => {
   return (
     <div className="todo-body tasks-container">
       {selectedProject.tasks.length > 0 && selectedProject.tasks.map((task, idx) => (
-        <Task key={idx} idx={idx} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
+        <Task key={task.id} idx={idx} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
       ))}
     </div>
   )
