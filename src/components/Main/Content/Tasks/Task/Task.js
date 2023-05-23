@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
 import TaskNameMain from '../../../../UI-Elements/inputs/TaskNameMain/TaskNameMain';
+import MoveTaskUpBtn from '../../../../UI-Elements/buttons/MoveTaskUpBtn/MoveTaskUpBtn';
+import MoveTaskDownBtn from '../../../../UI-Elements/buttons/MoveTaskDownBtn';
 import DelTaskBtn from '../../../../UI-Elements/buttons/DelTaskBtn';
 
 const Task = ({ selectedProject, idx }) => {
@@ -17,12 +19,8 @@ const Task = ({ selectedProject, idx }) => {
     <div className="task-wrapper">
       {!showEditTaskModal && (<div className="task">
         <TaskNameMain task={task} isChecked={isChecked} setisChecked={setisChecked} color={color} backgroundColor={backgroundColor} />
-        <button className="btn-svg list-actions move move-up">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-up"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-        </button>
-        <button className="btn-svg list-actions move move-down">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-down"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-        </button>
+        <MoveTaskUpBtn selectedProject={selectedProject} idx={idx} />
+        <MoveTaskDownBtn selectedProject={selectedProject} idx={idx} />
         <button className="btn-svg list-actions edit-task" onClick={() => setShowEditTaskModal(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="todo-header-edit pen feather feather-edit-3"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </button>
