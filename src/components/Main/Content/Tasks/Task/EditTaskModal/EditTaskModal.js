@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import TaskName from './TaskName';
 import TaskDescription from './TaskDescription';
+import DueDate from '../../../../../UI-Elements/buttons/DueDate';
 import ProjectsList from './ProjectsList';
 import PriorityList from './PriorityList';
 import SaveTaskBtn from './SaveTaskBtn';
@@ -22,7 +23,7 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
 
   useEffect(() => {
     const outsideClickHandler = e => {
-      if (e.target.closest('.options-container')) return
+      if (e.target.closest('.options-container') || e.target.closest('.todo-header-edit') || e.target.closest('.react-datepicker-popper')) return
       if (refTaskModal.current && !refTaskModal.current.contains(e.target)) setShowEditTaskModal(false)
     }
     document.addEventListener('click', outsideClickHandler)
@@ -51,12 +52,13 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
       <TaskName taskNameText={taskNameText} setTaskName={setTaskName} />
       <TaskDescription description={description} setDescription={setDescription} />
       <div className="form-params">
-        <button type="button" className="form-date form-container">
+        {/* <button type="button" className="form-date form-container">
         <svg className="form-date" style={{width:15, height:15}} viewBox="0 0 24 24">
         <path fill="currentColor" d="M19 3C20.11 3 21 3.89 21 5V19C21 20.11 20.11 21 19 21H5C3.89 21 3 20.1 3 19V5C3 3.89 3.9 3 5 3H6V1H8V3H16V1H18V3H19M19 19V9H5V19H19M19 7V5H5V7H19M7 11H9V17H7V11" />
         </svg>
         <span className="form-date">19 oct</span>
-        </button>
+        </button> */}
+        <DueDate />
         <div ref={refProjectBtn} className="form-project-container form-container">
           <input
             type="checkbox"

@@ -1,0 +1,19 @@
+.react-datepicker-wrapper {
+  width: 100px;
+  margin-right: 8px;
+  border: 1px solid var(--main-bd-color);
+  border-radius: var(--main-bd-radius);
+
+  display: flex;
+  align-items: center;
+}
+
+.react-datepicker__input-container {
+  height: 100%;
+}
+
+button.form-date {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
