@@ -15,6 +15,7 @@ function App() {
   useEffect(() => {
     setSelectedProject(allProjects.find(project => project.selected));
     setShouldUpdate(false);
+    localStorage.setItem('allProjects', JSON.stringify(allProjects));
   }, [selectedProject, allProjects, shouldUpdate, setShouldUpdate]);
 
   useEffect(() => {

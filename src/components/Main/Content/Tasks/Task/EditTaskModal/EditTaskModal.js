@@ -26,7 +26,7 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
 
   useEffect(() => {
     const outsideClickHandler = e => {
-      if (e.target.closest('.options-container') || e.target.closest('.todo-header-edit') || e.target.closest('.react-datepicker-popper')) return
+      if (e.target.closest('.options-container') || e.target.closest(`button.edit-task#${task.id}`) || e.target.closest('.react-datepicker-popper')) return
       if (refTaskModal.current && !refTaskModal.current.contains(e.target)) setShowEditTaskModal(false)
     }
     document.addEventListener('click', outsideClickHandler)
