@@ -275,7 +275,7 @@ p.task-descr {
   margin-left: 32px;
 }
 
-.task-calendar {
+.task-calendar, .task-clock {
   font-size: 0.8rem;
   color: grey;
 }
@@ -319,7 +319,7 @@ p.task-descr {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  margin-right: 8px;
+  /* margin-right: 8px; */
   border: 1px solid var(--main-bd-color);
   border-radius: var(--main-bd-radius);
   background: none;
@@ -334,6 +334,7 @@ p.task-descr {
 .form-params {
   display: flex;
   justify-content: flex-start;
+  gap: 8px;
 }
 
 .form-project-container, .form-priority-container {
@@ -383,6 +384,7 @@ div.form-priority-container div.priority-input {
 }
 
 .form-save button:last-child {
+  margin-left: 8px;
   margin-right: 0;
   background-color: var(--main-hd-color);
   color: white;

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import TaskName from './TaskName';
 import TaskDescription from './TaskDescription';
 import DueDate from '../../../../../UI-Elements/buttons/DueDate';
+import DueTime from '../../../../../UI-Elements/buttons/DueTime';
 import ProjectsList from './ProjectsList';
 import PriorityList from './PriorityList';
 import SaveTaskBtn from './SaveTaskBtn';
@@ -16,6 +17,8 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
   const [btnIcon, setBtnIcon] = useState(projectIcon(selectedProject));
   const [prioritySelection, setPrioritySelection] = useState(task._priority);
   const [showPriorityList, setShowPriorityList] = useState(false);
+  const [startDate, setStartDate] = useState(task.dueDate);
+
 
   const refTaskModal = useRef();
   const refProjectBtn = useRef();
@@ -52,13 +55,8 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
       <TaskName taskNameText={taskNameText} setTaskName={setTaskName} />
       <TaskDescription description={description} setDescription={setDescription} />
       <div className="form-params">
-        {/* <button type="button" className="form-date form-container">
-        <svg className="form-date" style={{width:15, height:15}} viewBox="0 0 24 24">
-        <path fill="currentColor" d="M19 3C20.11 3 21 3.89 21 5V19C21 20.11 20.11 21 19 21H5C3.89 21 3 20.1 3 19V5C3 3.89 3.9 3 5 3H6V1H8V3H16V1H18V3H19M19 19V9H5V19H19M19 7V5H5V7H19M7 11H9V17H7V11" />
-        </svg>
-        <span className="form-date">19 oct</span>
-        </button> */}
-        <DueDate />
+        <DueDate startDate={startDate} setStartDate={setStartDate} />
+        <DueTime startDate={startDate} setStartDate={setStartDate} />
         <div ref={refProjectBtn} className="form-project-container form-container">
           <input
             type="checkbox"
@@ -109,7 +107,7 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
       </div>
       <div className="form-save">
         <button className="cancel-new-task" type="button" onClick={() => setShowEditTaskModal(false)}>Annnuler</button>
-        <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} idx={idx} taskNameText={taskNameText} description={description} prioritySelection={prioritySelection} setShowEditTaskModal={setShowEditTaskModal} />
+        <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} idx={idx} taskNameText={taskNameText} description={description} startDate={startDate} prioritySelection={prioritySelection} setShowEditTaskModal={setShowEditTaskModal} />
       </div>
         </form>
   )

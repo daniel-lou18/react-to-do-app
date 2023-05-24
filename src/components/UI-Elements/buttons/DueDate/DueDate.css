@@ -1,11 +1,19 @@
 .react-datepicker-wrapper {
-  width: 100px;
+  height: 100%;
   margin-right: 8px;
   border: 1px solid var(--main-bd-color);
   border-radius: var(--main-bd-radius);
 
   display: flex;
   align-items: center;
+}
+
+.dueDate {
+  width: 110px;
+}
+
+.dueTime {
+  width: 75px;
 }
 
 .react-datepicker__input-container {
@@ -16,4 +24,8 @@ button.form-date {
   border: none;
   width: 100%;
   height: 100%;
+}
+
+svg.task-clock {
+  margin-left: 7px;
 }

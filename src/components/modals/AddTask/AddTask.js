@@ -1,6 +1,7 @@
 import TaskName from '../../UI-Elements/inputs/TaskName';
 import TaskDescription from '../../UI-Elements/inputs/TaskDescription/TaskDescription';
 import DueDate from '../../UI-Elements/buttons/DueDate';
+import DueTime from '../../UI-Elements/buttons/DueTime/DueTime';
 import ProjectChoiceBtn from '../../UI-Elements/buttons/ProjectChoiceBtn/ProjectChoiceBtn';
 import ProjectsList from '../../UI-Elements/buttons/ProjectChoiceBtn/ProjectsList/ProjectsList';
 import PriorityChoiceBtn from '../../UI-Elements/buttons/PriorityChoiceBtn/PriorityChoiceBtn';
@@ -17,6 +18,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
   const [btnIcon, setBtnIcon] = useState(projectIcon(selectedProject));
   const [prioritySelection, setPrioritySelection] = useState(1);
   const [showPriorityList, setShowPriorityList] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
 
 
   useEffect(() => {
@@ -40,7 +42,8 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
           <TaskName taskNameText={taskNameText} setTaskName={setTaskName}/>
           <TaskDescription description={description} setDescription={setDescription} />
           <div className="form-params" onClick={e => e.stopPropagation()}>
-            <DueDate />
+          <DueDate startDate={startDate} setStartDate={setStartDate} />
+          <DueTime startDate={startDate} setStartDate={setStartDate} />
             <div className="form-project-container form-container">
               <ProjectChoiceBtn showProjectsList={showProjectsList} setShowProjectsList={setShowProjectsList} showPriorityList={showPriorityList} setShowPriorityList={setShowPriorityList} projectSelection={projectSelection} btnIcon={btnIcon} />
               {showProjectsList && <ProjectsList projectSelection={projectSelection} setProjectSelection={setProjectSelection} setShowProjectsList={setShowProjectsList}/>}
@@ -53,7 +56,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
         </div>
         <div className="form-save">
           <button className="cancel-new-task cancel" type="button" onClick={closeModal}>Annnuler</button>
-          <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} taskNameText={taskNameText} description={description} prioritySelection={prioritySelection} setShowAddTask={setShowAddTask} />
+          <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} taskNameText={taskNameText} description={description} startDate={startDate} prioritySelection={prioritySelection} setShowAddTask={setShowAddTask} />
         </div>
       </form>
     </div>
