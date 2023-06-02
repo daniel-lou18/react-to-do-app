@@ -1,3 +1,4 @@
+import Modal from '../Modal';
 import TaskName from '../../UI-Elements/inputs/TaskName';
 import TaskDescription from '../../UI-Elements/inputs/TaskDescription/TaskDescription';
 import DueDate from '../../UI-Elements/buttons/DueDate';
@@ -9,8 +10,11 @@ import PriorityList from '../../UI-Elements/buttons/PriorityChoiceBtn/PriorityLi
 import { projectIcon } from '../../../utils/helpers';
 import SaveTaskBtn from '../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
 import { useState, useEffect } from 'react';
+import { useProjectsContext } from '../../../context/ProjectsContext';
+import Task from '../../../data/JSClasses/Task';
 
 const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProject }) => {
+  const { allProjects, setShouldUpdate } = useProjectsContext();
   const [taskNameText, setTaskName] = useState();
   const [description, setDescription] = useState();
   const [projectSelection, setProjectSelection] = useState(selectedProject);
@@ -35,9 +39,18 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
     setShowPriorityList(false);
   }
 
+  const saveTaskHandler = e => {
+    e.preventDefault();
+    const currProject = allProjects.find(project => project.id === projectSelection.id);
+    const newTask = new Task(taskNameText, description, startDate, currProject.projectName, prioritySelection);
+    currProject.tasks.push(newTask)
+    setShowAddTask(false);
+    setShouldUpdate(true);
+  }
+
   return (
-    <div className="backdrop" onClick={closeModal}>
-      <form className="task-form modal new-task" id="task-0" onClick={closeMenus}>
+    <Modal closeModal={closeModal}>
+      <form className="task-form modal new-task" id="task-0" onClick={closeMenus} onSubmit={saveTaskHandler}>
         <div className="form-main">
           <TaskName taskNameText={taskNameText} setTaskName={setTaskName}/>
           <TaskDescription description={description} setDescription={setDescription} />
@@ -59,7 +72,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
           <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} taskNameText={taskNameText} description={description} startDate={startDate} prioritySelection={prioritySelection} setShowAddTask={setShowAddTask} />
         </div>
       </form>
-    </div>
+    </Modal>
   )
 }
 

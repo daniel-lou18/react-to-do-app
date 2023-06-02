@@ -5,10 +5,13 @@ import DueDate from '../../../../../UI-Elements/buttons/DueDate';
 import DueTime from '../../../../../UI-Elements/buttons/DueTime';
 import ProjectsList from './ProjectsList';
 import PriorityList from './PriorityList';
-import SaveTaskBtn from './SaveTaskBtn';
+import SaveTaskBtn from '../../../../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
 import { projectIcon, priorityNumToColor } from '../../../../../../utils/helpers';
+import { useProjectsContext } from '../../../../../../context/ProjectsContext';
+import Task from '../../../../../../data/JSClasses/Task';
 
 const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
+  const { allProjects, setShouldUpdate } = useProjectsContext();
   const task = selectedProject.tasks[idx]
   const [taskNameText, setTaskName] = useState(task.taskName);
   const [description, setDescription] = useState(task.descr);
@@ -49,8 +52,24 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
     setBtnIcon(projectIcon(projectSelection))
   }, [projectSelection])
 
+  const saveTaskHandler = e => {
+    e.preventDefault();
+    if (selectedProject.id === projectSelection.id) {
+      const project = allProjects.find(project => project.id === selectedProject.id);
+      project.tasks[idx] = new Task(taskNameText, description, startDate, project.projectName, prioritySelection)
+      setShowEditTaskModal(false)
+    } else {
+      const prevProject = allProjects.find(project => project.id === selectedProject.id);
+      const currProject = allProjects.find(project => project.id === projectSelection.id);
+      prevProject.tasks.splice(idx, 1);
+      currProject.tasks.push(new Task(taskNameText, description, startDate, currProject.projectName, prioritySelection));
+      setShowEditTaskModal(false);
+      setShouldUpdate(true);
+    }
+  }
+
   return (
-    <form ref={refTaskModal} className="task-form modify" id="task-modify">
+    <form ref={refTaskModal} className="task-form modify" id="task-modify" onSubmit={saveTaskHandler}>
       <div className="form-main">
       <TaskName taskNameText={taskNameText} setTaskName={setTaskName} />
       <TaskDescription description={description} setDescription={setDescription} />
@@ -107,10 +126,12 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
       </div>
       <div className="form-save">
         <button className="cancel-new-task" type="button" onClick={() => setShowEditTaskModal(false)}>Annnuler</button>
-        <SaveTaskBtn selectedProject={selectedProject} projectSelection={projectSelection} idx={idx} taskNameText={taskNameText} description={description} startDate={startDate} prioritySelection={prioritySelection} setShowEditTaskModal={setShowEditTaskModal} />
+        <SaveTaskBtn />
       </div>
         </form>
   )
 }
 
 export default EditTaskModal;
+
+// saveTaskBtn { selectedProject, projectSelection, idx, taskNameText, description, startDate, prioritySelection, setShowEditTaskModal }

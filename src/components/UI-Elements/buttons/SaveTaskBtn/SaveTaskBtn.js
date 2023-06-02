@@ -1,20 +1,6 @@
-import { useProjectsContext } from "../../../../context/ProjectsContext";
-import Task from "../../../../data/JSClasses/Task";
-
-const SaveTaskBtn = ({ projectSelection, taskNameText, description, startDate, prioritySelection, setShowAddTask }) => {
-  const { allProjects, setShouldUpdate } = useProjectsContext()
-
-  const saveTaskHandler = e => {
-    e.preventDefault();
-    const currProject = allProjects.find(project => project.id === projectSelection.id);
-    const newTask = new Task(taskNameText, description, startDate, currProject.projectName, prioritySelection);
-    currProject.tasks.push(newTask)
-    setShowAddTask(false);
-    setShouldUpdate(true);
-    }
-
+const SaveTaskBtn = () => {
   return (
-    <button className="save-new-task" onClick={saveTaskHandler}>Enregistrer</button>
+    <button className="save-new-task">Enregistrer</button>
   )
 }
 

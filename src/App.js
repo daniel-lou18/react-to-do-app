@@ -5,6 +5,8 @@ import AddTask from './components/modals/AddTask';
 import { resetStrikethroughAllTasks } from './utils/helpers';
 import { useState, useEffect } from 'react';
 import { useProjectsContext } from './context/ProjectsContext';
+import { CSSTransition } from 'react-transition-group';
+import styles from './components/modals/AddTask/AddTask.module.css';
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -27,7 +29,16 @@ function App() {
       <Header showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} strikethroughCount={strikethroughCount}/>
       <Sidebar />
       <Main showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
-      {showAddTask && <AddTask showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />}
+      <CSSTransition
+        in={showAddTask}
+        timeout={{ enter: 500, exit: 300 }}
+        classNames={{ ...styles }}
+        unmountOnExit
+        onEnter={() => setShowAddTask(true)}
+        onExited={() => setShowAddTask(false)}
+      >
+        <AddTask showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
+      </CSSTransition>
     </>
   );
 }

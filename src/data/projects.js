@@ -1,4 +1,3 @@
-// import parseJSON from 'date-fns/parseJSON';
 import allSavedProjects from './localStorage';
 import Task from './JSClasses/Task';
 import Project, { PersonalProject } from './JSClasses/Project';

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Modal from '../../../modals/Modal';
 import ProjectColorsList from "./ProjectColorsList";
 import { PersonalProject } from '../../../../data/JSClasses/Project';
 import { useProjectsContext } from '../../../../context/ProjectsContext';
@@ -29,7 +30,7 @@ const NewProjectModal = ({showModal, setShowModal}) => {
   }
 
   return (
-    <div className="backdrop" onClick={closeModal}>
+    <Modal closeModal={closeModal}>
       <form className="project-form modal new-project" id="task-0" onClick={e => {
         e.stopPropagation();
         setShowColorMenu(false)
@@ -83,7 +84,7 @@ const NewProjectModal = ({showModal, setShowModal}) => {
           <button className="save-new-project save" onClick={createProject}>Créer</button>
         </div>
       </form>
-    </div>
+    </Modal>
   )
 }
 
