@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import TaskName from './TaskName';
 import TaskDescription from './TaskDescription';
-import DueDate from '../../../../../UI-Elements/buttons/DueDate';
-import DueTime from '../../../../../UI-Elements/buttons/DueTime';
+import DueDate from '../../../../UI-Elements/buttons/DueDate';
+import DueTime from '../../../../UI-Elements/buttons/DueTime';
 import ProjectsList from './ProjectsList';
 import PriorityList from './PriorityList';
-import SaveTaskBtn from '../../../../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
-import { projectIcon, priorityNumToColor } from '../../../../../../utils/helpers';
-import { useProjectsContext } from '../../../../../../context/ProjectsContext';
-import Task from '../../../../../../data/JSClasses/Task';
+import SaveTaskBtn from '../../../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
+import { projectIcon, priorityNumToColor } from '../../../../../utils/helpers';
+import { useProjectsContext } from '../../../../../context/ProjectsContext';
+import Task from '../../../../../data/JSClasses/Task';
 
 const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
   const { allProjects, setShouldUpdate } = useProjectsContext();

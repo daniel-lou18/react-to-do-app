@@ -1,0 +1,9 @@
+.sidebar-project {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar-project.active li {
+  background-color: rgb(222, 184, 135, 0.4);
+  border-radius: 5px;
+}

@@ -1,4 +1,4 @@
-import priorities from '../../../../../../../data/priorities';
+import priorities from '../../../../../../data/priorities';
 
 const PriorityList = ({ prioritySelection, setPrioritySelection, setShowPriorityList }) => {
 

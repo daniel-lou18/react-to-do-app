@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
-import TaskNameMain from '../../../../UI-Elements/inputs/TaskNameMain/TaskNameMain';
-import MoveTaskUpBtn from '../../../../UI-Elements/buttons/MoveTaskUpBtn/MoveTaskUpBtn';
-import MoveTaskDownBtn from '../../../../UI-Elements/buttons/MoveTaskDownBtn';
-import DelTaskBtn from '../../../../UI-Elements/buttons/DelTaskBtn';
+import TaskNameMain from '../../../UI-Elements/inputs/TaskNameMain/TaskNameMain';
+import MoveTaskUpBtn from '../../../UI-Elements/buttons/MoveTaskUpBtn/MoveTaskUpBtn';
+import MoveTaskDownBtn from '../../../UI-Elements/buttons/MoveTaskDownBtn';
+import DelTaskBtn from '../../../UI-Elements/buttons/DelTaskBtn';
 import TaskDateTime from './TaskDateTime/TaskDateTime';
 import { CSSTransition } from 'react-transition-group';
 import styles from './Task.module.css';

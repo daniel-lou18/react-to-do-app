@@ -1,10 +1,10 @@
-import Inbox from './Inbox'
+import Inbox from './Inbox';
 
-const DefaultProjects = ({ allProjects, setAllProjects, selectedProjectId, setSelectedProjectId }) => {
+const DefaultProjects = ({ allProjects, setAllProjects, projectId, setSelectedProject }) => {
   return (
     <div className="default-projects-container">
       <ul className="default-projects-list">
-        <Inbox allProjects={allProjects} setAllProjects={setAllProjects} selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId} />
+        <Inbox allProjects={allProjects} setAllProjects={setAllProjects} projectId={projectId} setSelectedProject={setSelectedProject} />
         <li className="default-project project today">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="crimson" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <div className="today-title title">Aujourd'hui</div>

@@ -58,10 +58,10 @@ li {
   cursor: pointer;
 }
 
-.projects-container li:has(input:checked) {
+/* .projects-container li:has(input:checked) {
   background-color: rgb(222, 184, 135, 0.4);
   border-radius: 5px;
-}
+} */
 
 .projects-group-container {
   padding-right: 10px;

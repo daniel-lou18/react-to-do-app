@@ -1,5 +1,5 @@
-import { useProjectsContext } from '../../../../../../../context/ProjectsContext';
-import { projectIcon } from '../../../../../../../utils/helpers';
+import { useProjectsContext } from '../../../../../../context/ProjectsContext';
+import { projectIcon } from '../../../../../../utils/helpers';
 
 const ProjectsList = ({ projectSelection, setProjectSelection, setShowProjectsList }) => {
   const { allProjects, setAllProjects } = useProjectsContext();

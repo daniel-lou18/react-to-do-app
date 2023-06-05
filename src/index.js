@@ -1,20 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import App from './App';
-import ProjectsProvider from './context/ProjectsContext';
+import Root from './routes/Root';
+import Main from './routes/Main/Main';
 
-const Root = () => {
-  return (
-    <ProjectsProvider>
-      <App />
-    </ProjectsProvider>
-  )
-}
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        path: '/projects/:projectId',
+        element: <Main />,
+      }
+    ]
+  }
+])
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root />
+    <RouterProvider router={router} />
   </React.StrictMode>,
   document.getElementById('root')
 );

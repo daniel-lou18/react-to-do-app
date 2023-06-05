@@ -2,22 +2,17 @@ import DefaultProjects from './DefaultProjects';
 import HeaderPersProjects from './HeaderPersProjects';
 import PersonalProjects from './PersonalProjects';
 import { useProjectsContext } from '../../context/ProjectsContext';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import './Sidebar.css'
 
-const Sidebar = () => {
-  const { allProjects, setAllProjects, shouldUpdate, setShouldUpdate } = useProjectsContext();
-  const [selectedProjectId, setSelectedProjectId] = useState();
-
-  useEffect(() => {
-    setSelectedProjectId(allProjects.find(project => project.selected).id);
-    setShouldUpdate(true);
-  }, [selectedProjectId, allProjects, shouldUpdate, setShouldUpdate])
+const Sidebar = ({ setSelectedProject }) => {
+  const { allProjects, setAllProjects } = useProjectsContext();
 
   return (
     <div className="projects-container content-container">
-      <DefaultProjects allProjects={allProjects} setAllProjects={setAllProjects} selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId} />
+      <DefaultProjects allProjects={allProjects} setAllProjects={setAllProjects} setSelectedProject={setSelectedProject} />
       <HeaderPersProjects />
-      <PersonalProjects allProjects={allProjects} setAllProjects={setAllProjects} selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId} />
+      <PersonalProjects allProjects={allProjects} setAllProjects={setAllProjects} setSelectedProject={setSelectedProject} />
     </div>
   )
 }

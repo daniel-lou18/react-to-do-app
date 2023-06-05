@@ -1,5 +1,4 @@
-const Header = ({ allProjects, setAllProjects, showAddTask, setShowAddTask }) => {
-  const selectedProject = allProjects.find(project => project.selected)
+const Header = ({ selectedProject, showAddTask, setShowAddTask }) => {
   if (!selectedProject) return
 
   const personalProjectIcon = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={selectedProject.color} stroke="none" className="list-dot feather feather-circle"><circle cx="12" cy="12" r="5"/></svg>
