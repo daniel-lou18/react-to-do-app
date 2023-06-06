@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
 import Header from './Header';
 import Tasks from './Tasks';
+import AddTaskBottomBtn from '../UI-Elements/buttons/AddTaskBottomBtn/AddTaskBottomBtn';
 
-const Content = ({ selectedProject, showAddTask, setShowAddTask }) => {
+const Content = ({ selectedProject, setShowAddTask }) => {
 
   return (
     <div className='todo-container content-container'>
-      <Header selectedProject={selectedProject} showAddTask={showAddTask} setShowAddTask={setShowAddTask} />
+      <Header selectedProject={selectedProject} setShowAddTask={setShowAddTask} />
       <Tasks selectedProject={selectedProject} />
+      <AddTaskBottomBtn setShowAddTask={setShowAddTask} />
     </div>
   )
 }

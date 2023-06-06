@@ -25,7 +25,7 @@ function App({ showAddTask, setShowAddTask }) {
 
   return (
     <>
-      <Header showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} strikethroughCount={strikethroughCount}/>
+      <Header setShowAddTask={setShowAddTask} selectedProject={selectedProject} strikethroughCount={strikethroughCount}/>
       <Sidebar setSelectedProject={setSelectedProject}/>
       <CSSTransition
         in={showAddTask}

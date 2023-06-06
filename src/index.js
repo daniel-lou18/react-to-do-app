@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Root from './routes/Root';
-import Main from './routes/Main/Main';
+import Main from './routes/Main';
+import Today from './routes/Today';
+import Overdue from  './routes/Overdue';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
       {
         path: '/projects/:projectId',
         element: <Main />,
+      },
+      {
+        path: '/projects/today',
+        element: <Today />
+      },
+      {
+        path: '/projects/overdue',
+        element: <Overdue />
       }
     ]
   }

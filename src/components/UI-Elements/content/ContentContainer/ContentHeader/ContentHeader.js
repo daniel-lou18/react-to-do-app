@@ -1,19 +1,23 @@
-const Header = ({ selectedProject, setShowAddTask }) => {
-  if (!selectedProject) return
+import { useLocation } from "react-router-dom";
 
-  const personalProjectIcon = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={selectedProject.color} stroke="none" className="list-dot feather feather-circle"><circle cx="12" cy="12" r="5"/></svg>
-  const defaultProjectIcon = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="dodgerblue" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="feather feather-inbox list-dot"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
-  const icon = selectedProject.constructor.name === 'PersonalProject' ? personalProjectIcon : defaultProjectIcon;
+const ContentHeader = ({ setShowAddTask }) => {
+  const location = useLocation();
+  const locationParts = location.pathname.split('/');
+  const timing = locationParts[locationParts.length - 1];
+  const capitalizedTiming = timing[0].toUpperCase() + timing.slice(1);
+
+  const iconOverdue = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  const iconToday = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="crimson" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
 
   return (
     <div className="todo-header list-title-container">
-      {icon}
+      {timing === 'today' ? iconToday : iconOverdue}
       <input
         type="text"
         className="list-title"
         name="list-title"
         id="list-title-1"
-        value={selectedProject.capitalizedProjectName}
+        value={capitalizedTiming}
         readOnly
       />
       <button className="btn-svg list-actions add-task" onClick={() => setShowAddTask(prev => !prev)}>
@@ -29,4 +33,4 @@ const Header = ({ selectedProject, setShowAddTask }) => {
   )
 }
 
-export default Header;
+export default ContentHeader;

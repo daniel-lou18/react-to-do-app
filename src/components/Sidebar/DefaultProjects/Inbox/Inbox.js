@@ -18,6 +18,7 @@ const Inbox = ({ allProjects, setAllProjects, setSelectedProject }) => {
             name="project-option"
             id="sidebar-inbox"
             value={inbox.id}
+            readOnly
             // onChange={selectProjectHandler}
             // checked={inbox.id === selectedProjectId}
           />

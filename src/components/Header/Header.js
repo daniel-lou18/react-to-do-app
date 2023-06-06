@@ -2,7 +2,7 @@ import RemoveTaskBigBtn from '../UI-Elements/buttons/RemoveTaskBigBtn';
 import AddTaskBigBtn from '../UI-Elements/buttons/AddTaskBigBtn';
 import './Header.css';
 
-const Header = ({ showAddTask, setShowAddTask, selectedProject, strikethroughCount }) => {
+const Header = ({ setShowAddTask, selectedProject, strikethroughCount }) => {
 
   return (
     <>
@@ -12,7 +12,7 @@ const Header = ({ showAddTask, setShowAddTask, selectedProject, strikethroughCou
           {strikethroughCount.length > 0 && <RemoveTaskBigBtn selectedProject={selectedProject} strikethroughCount={strikethroughCount} />}
         </div>
         <div className="header-btn-container">
-          <AddTaskBigBtn showAddTask={showAddTask} setShowAddTask={setShowAddTask} />
+          <AddTaskBigBtn setShowAddTask={setShowAddTask} />
         </div>
       </div>
     </>

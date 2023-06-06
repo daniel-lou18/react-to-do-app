@@ -2,8 +2,7 @@ import DefaultProjects from './DefaultProjects';
 import HeaderPersProjects from './HeaderPersProjects';
 import PersonalProjects from './PersonalProjects';
 import { useProjectsContext } from '../../context/ProjectsContext';
-import { useEffect, useState } from 'react';
-import './Sidebar.css'
+import './Sidebar.css';
 
 const Sidebar = ({ setSelectedProject }) => {
   const { allProjects, setAllProjects } = useProjectsContext();

@@ -10,7 +10,7 @@ const Root = () => {
   return (
     <ProjectsProvider>
       <App showAddTask={showAddTask} setShowAddTask={setShowAddTask} />
-      <Outlet context={[showAddTask, setShowAddTask]}/>
+      <Outlet context={[setShowAddTask]}/>
     </ProjectsProvider>
   )
 }

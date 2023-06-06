@@ -6,7 +6,7 @@ import styles from './Main.module.css';
 
 
 const Main = () => {
-  const [showAddTask, setShowAddTask] = useOutletContext();
+  const [setShowAddTask] = useOutletContext();
   const { projectId } = useParams();
   const { allProjects } = useProjectsContext();
   const selectedProject = allProjects.find(project => project.id === projectId);
@@ -19,7 +19,7 @@ const Main = () => {
       classNames={{ ...styles}}
       unmountOnExit
       >
-        <Content showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} />
+        <Content setShowAddTask={setShowAddTask} selectedProject={selectedProject} />
       </CSSTransition>
     </SwitchTransition>
   )

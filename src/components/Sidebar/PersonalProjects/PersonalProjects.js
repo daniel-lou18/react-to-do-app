@@ -14,7 +14,7 @@ const PersonalProjects = ({ allProjects, setAllProjects, setSelectedProject }) =
     <div className="personal-projects-container">
       <ul className="personal-projects-list"></ul>
       {personalProjects.length > 0 && personalProjects.map((project, index) => (
-        <NavLink className="sidebar-project" to={`projects/${project.id}`} onClick={() => selectProjectHandler(project.id)}>
+        <NavLink key={project.id} className="sidebar-project" to={`projects/${project.id}`} onClick={() => selectProjectHandler(project.id)}>
           <li key={project.id} className="sidebar-project sidebar-personal" data-id={project.id}>
             <input
               className="sidebar-project"
@@ -23,6 +23,7 @@ const PersonalProjects = ({ allProjects, setAllProjects, setSelectedProject }) =
               name="project-option"
               id={`sidebar-project-${index}`}
               value={project.id}
+              readOnly
               // onChange={selectProjectHandler}
               // checked={project.id === selectedProjectId}
             />
