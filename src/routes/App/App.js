@@ -10,7 +10,6 @@ import styles from '../../components/modals/AddTask/AddTask.module.css';
 function App({ showAddTask, setShowAddTask }) {
   const { allProjects, shouldUpdate, setShouldUpdate } = useProjectsContext();
   const [selectedProject, setSelectedProject] = useState(allProjects.find(project => project.selected));
-  const strikethroughCount = selectedProject.tasks.filter(task => task.strikethrough);
 
   useEffect(() => {
     console.log(allProjects)
@@ -25,7 +24,7 @@ function App({ showAddTask, setShowAddTask }) {
 
   return (
     <>
-      <Header setShowAddTask={setShowAddTask} selectedProject={selectedProject} strikethroughCount={strikethroughCount}/>
+      <Header setShowAddTask={setShowAddTask} />
       <Sidebar setSelectedProject={setSelectedProject}/>
       <CSSTransition
         in={showAddTask}

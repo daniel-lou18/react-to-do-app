@@ -1,7 +1,6 @@
-import Task from './Task'
+import Task from './Task';
 
 const Tasks = ({ selectedProject }) => {
-  if (!selectedProject) return
 
   return (
     <div className="todo-body tasks-container">

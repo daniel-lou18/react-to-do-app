@@ -1,11 +1,14 @@
 import { useProjectsContext } from "../../../../context/ProjectsContext"
 
 const DelTaskBtn = ({selectedProject, idx}) => {
-  const { allProjects, setShouldUpdate } = useProjectsContext();
+  const { setShouldUpdate, setAllProjects } = useProjectsContext();
   const delTaskHandler = () => {
-    const project = allProjects.find(project => project.id === selectedProject.id);
-    project.tasks.splice(idx, 1);
-    setShouldUpdate(true)
+    selectedProject.tasks.splice(idx, 1);
+    setAllProjects(projects => projects.map(project => {
+      if (project.id === selectedProject.id) return selectedProject
+      return project
+    }))
+    // setShouldUpdate(true)
   }
   return (
     <button className="btn-svg list-actions del-task" onClick={delTaskHandler}>

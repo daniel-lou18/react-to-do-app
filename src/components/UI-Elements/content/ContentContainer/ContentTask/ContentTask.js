@@ -18,7 +18,6 @@ const ContentTask = ({ tasks, idx }) => {
   const color = task._priorityColor;
   const backgroundColor = task._priorityBackgroundColor;
 
-
   return (
     <li className="task-wrapper">
       {showTask && (

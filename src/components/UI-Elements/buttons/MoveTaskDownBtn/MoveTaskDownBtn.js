@@ -1,12 +1,16 @@
 import { useProjectsContext } from "../../../../context/ProjectsContext"
 
 const MoveTaskDownBtn = ({ selectedProject, idx }) => {
-  const { setShouldUpdate } = useProjectsContext();
+  const { setShouldUpdate, setAllProjects } = useProjectsContext();
 
   const moveDownHandler = () => {
     if (idx >= selectedProject.tasks.length - 1) return
     selectedProject.tasks.splice(idx + 1, 0, ...selectedProject.tasks.splice(idx, 1));
-    setShouldUpdate(true)
+    setAllProjects(projects => projects.map(project => {
+      if (project.id === selectedProject.id) return selectedProject
+      return project
+    }))
+    // setShouldUpdate(true)
   }
 
   return (

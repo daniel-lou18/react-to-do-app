@@ -6,18 +6,19 @@ import { useLocation } from "react-router-dom";
 const ContentTasks = () => {
   const { allProjects } = useProjectsContext();
   const allTasks = allProjects.flatMap(project => project.tasks);
-  const dueTasks = allTasks.filter(task => compareAsc(task.dueDate, new Date()) === -1);
+  const overdueTasks = allTasks.filter(task => compareAsc(task.dueDate, new Date()) === -1);
   const todayTasks = allTasks.filter(task => task.dueDate.toDateString() === new Date().toDateString());
 
   const location = useLocation();
   const locationParts = location.pathname.split('/');
   const timing = locationParts[locationParts.length -1];
+  const tasks = timing === 'today' ? todayTasks : overdueTasks;
 
   return (
     <div className="todo-body tasks-container">
       <ul>
-        {dueTasks.length > 0 && dueTasks.map((task, idx) => (
-          <ContentTask key={task.id} idx={idx} tasks={timing === 'today' ? todayTasks : dueTasks} />
+        {tasks.length > 0 && tasks.map((task, idx) => (
+          <ContentTask key={task.id} idx={idx} tasks={tasks} />
         ))}
       </ul>
     </div>

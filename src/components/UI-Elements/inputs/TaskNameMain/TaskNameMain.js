@@ -1,7 +1,23 @@
 import { useProjectsContext } from "../../../../context/ProjectsContext";
 
 const TaskNameMain = ({ isChecked, setisChecked, color, backgroundColor, task }) => {
-  const { setShouldUpdate } = useProjectsContext();
+  const { setShouldUpdate, setAllProjects } = useProjectsContext();
+
+  const onChangeHandler = () => {
+    setisChecked(prev => !prev)
+    task.strikethrough = !isChecked;
+    setAllProjects(projects => {
+      projects.forEach(project => {
+        project.tasks.forEach(_task => {
+          if (_task.id === task.id) {
+            _task.strikethrough = !isChecked
+          }
+        })
+      })
+      return projects
+    })
+    setShouldUpdate(true);
+  }
 
   return (
     <>
@@ -10,11 +26,7 @@ const TaskNameMain = ({ isChecked, setisChecked, color, backgroundColor, task })
             type="checkbox"
             id={task.id}
             checked={isChecked}
-            onChange={() => {
-              setisChecked(!isChecked)
-              task.strikethrough = !isChecked;
-              setShouldUpdate(true);
-            }}
+            onChange={onChangeHandler}
       />
       <label className="task-label" htmlFor={task.id}>
         <span style={{borderColor: color, backgroundColor: backgroundColor}} className="custom-checkbox">

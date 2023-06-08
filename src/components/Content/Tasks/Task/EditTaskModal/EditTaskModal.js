@@ -9,9 +9,10 @@ import SaveTaskBtn from '../../../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn
 import { projectIcon, priorityNumToColor } from '../../../../../utils/helpers';
 import { useProjectsContext } from '../../../../../context/ProjectsContext';
 import Task from '../../../../../data/JSClasses/Task';
+import { cloneDeep } from 'lodash';
 
 const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
-  const { allProjects, setShouldUpdate } = useProjectsContext();
+  const { allProjects, setAllProjects, setShouldUpdate } = useProjectsContext();
   const task = selectedProject.tasks[idx]
   const [taskNameText, setTaskName] = useState(task.taskName);
   const [description, setDescription] = useState(task.descr);
@@ -54,18 +55,26 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
 
   const saveTaskHandler = e => {
     e.preventDefault();
+    const allProjectsCopy = cloneDeep(allProjects);
+    let prevProject, currProject;
+
     if (selectedProject.id === projectSelection.id) {
-      const project = allProjects.find(project => project.id === selectedProject.id);
-      project.tasks[idx] = new Task(taskNameText, description, startDate, project.projectName, prioritySelection)
-      setShowEditTaskModal(false)
+      currProject = allProjectsCopy.find(project => project.id === selectedProject.id);
+      currProject.tasks[idx] = new Task(taskNameText, description, startDate, currProject.projectName, prioritySelection)
     } else {
-      const prevProject = allProjects.find(project => project.id === selectedProject.id);
-      const currProject = allProjects.find(project => project.id === projectSelection.id);
+      prevProject = allProjectsCopy.find(project => project.id === selectedProject.id);
+      currProject = allProjectsCopy.find(project => project.id === projectSelection.id);
       prevProject.tasks.splice(idx, 1);
       currProject.tasks.push(new Task(taskNameText, description, startDate, currProject.projectName, prioritySelection));
-      setShowEditTaskModal(false);
       setShouldUpdate(true);
     }
+
+    setAllProjects(projects => projects.map(project => {
+      if (project.id === currProject.id) return currProject;
+      if (project.id === prevProject?.id) return prevProject;
+      return project
+    }))
+    setShowEditTaskModal(false);
   }
 
   return (

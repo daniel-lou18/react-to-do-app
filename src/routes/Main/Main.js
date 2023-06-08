@@ -3,13 +3,13 @@ import { useOutletContext, useParams } from 'react-router-dom';
 import { useProjectsContext } from '../../context/ProjectsContext';
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import styles from './Main.module.css';
-
+import { cloneDeep } from 'lodash';
 
 const Main = () => {
   const [setShowAddTask] = useOutletContext();
-  const { projectId } = useParams();
   const { allProjects } = useProjectsContext();
-  const selectedProject = allProjects.find(project => project.id === projectId);
+  const { projectId } = useParams();
+  const selectedProject = cloneDeep(allProjects.find(project => project.id === projectId));
 
   return (
     <SwitchTransition>
@@ -19,7 +19,7 @@ const Main = () => {
       classNames={{ ...styles}}
       unmountOnExit
       >
-        <Content setShowAddTask={setShowAddTask} selectedProject={selectedProject} />
+        <Content setShowAddTask={setShowAddTask} selectedProject={selectedProject}/>
       </CSSTransition>
     </SwitchTransition>
   )

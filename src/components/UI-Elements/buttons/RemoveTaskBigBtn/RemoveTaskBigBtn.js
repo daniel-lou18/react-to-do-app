@@ -1,12 +1,19 @@
 import { useProjectsContext } from "../../../../context/ProjectsContext"
 
-const RemoveTaskBigBtn = ({ selectedProject, strikethroughCount }) => {
-  const { setShouldUpdate } = useProjectsContext();
-  const style = strikethroughCount.length > 1 ? { opacity: 1 } : { opacity: 0};
+const RemoveTaskBigBtn = ({ strikethroughCount }) => {
+  const { setAllProjects, setShouldUpdate } = useProjectsContext();
+  const style = strikethroughCount > 1 ? { opacity: 1 } : { opacity: 0};
 
   const delTasksHandler = () => {
-    selectedProject.tasks = selectedProject.tasks.filter(task => !task.strikethrough);
-    setShouldUpdate(true)
+    setAllProjects(projects => {
+      const newProjects = [];
+      projects.forEach(project => {
+        const newTasks = project.tasks.filter(task => !task.strikethrough)
+        project.tasks = newTasks;
+        newProjects.push(project)
+      })
+      return newProjects
+    })
   }
 
   return (

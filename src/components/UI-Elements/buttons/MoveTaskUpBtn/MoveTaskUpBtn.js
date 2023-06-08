@@ -1,12 +1,16 @@
 import { useProjectsContext } from "../../../../context/ProjectsContext"
 
 const MoveTaskUpBtn = ({ selectedProject, idx }) => {
-  const { setShouldUpdate } = useProjectsContext();
+  const { setShouldUpdate, setAllProjects } = useProjectsContext();
 
   const moveUpHandler = () => {
     if (idx < 1) return
     selectedProject.tasks.splice(idx - 1, 0, ...selectedProject.tasks.splice(idx, 1));
-    setShouldUpdate(true)
+    setAllProjects(projects => projects.map(project => {
+        if (project.id === selectedProject.id) return selectedProject
+        return project
+      }))
+    // setShouldUpdate(true)
   }
 
   return (
