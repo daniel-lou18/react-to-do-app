@@ -3,7 +3,7 @@ const Project = class {
   tasks = [];
   constructor(projectName, color, svg, selected = false) {
     this._projectName = projectName;
-    this.id = projectName + '-' + (Date.now() + '').slice(-10);
+    this.id = projectName + '-' + new Date().toDateString();
     this._color = color;
     this._svg = svg;
     this.message();

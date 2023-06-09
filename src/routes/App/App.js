@@ -31,7 +31,7 @@ function App({ showAddTask, setShowAddTask }) {
         timeout={{ enter: 500, exit: 300 }}
         classNames={{ ...styles }}
         unmountOnExit
-        onEnter={() => setShowAddTask(true)}
+        // onEnter={() => setShowAddTask(true)}
         onExited={() => setShowAddTask(false)}
       >
         <AddTask showAddTask={showAddTask} setShowAddTask={setShowAddTask} selectedProject={selectedProject} setSelectedProject={setSelectedProject} />

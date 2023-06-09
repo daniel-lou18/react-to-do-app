@@ -2,10 +2,11 @@ import ContentTask from "../ContentTask/ContentTask";
 import { useProjectsContext } from "../../../../../context/ProjectsContext";
 import { compareAsc } from "date-fns";
 import { useLocation } from "react-router-dom";
+import { cloneDeep } from "lodash";
 
 const ContentTasks = () => {
   const { allProjects } = useProjectsContext();
-  const allTasks = allProjects.flatMap(project => project.tasks);
+  const allTasks = cloneDeep(allProjects).flatMap(project => project.tasks);
   const overdueTasks = allTasks.filter(task => compareAsc(task.dueDate, new Date()) === -1);
   const todayTasks = allTasks.filter(task => task.dueDate.toDateString() === new Date().toDateString());
 

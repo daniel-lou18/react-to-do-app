@@ -4,7 +4,7 @@
 
 .appearActive {
   opacity: 1;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .enter {
@@ -13,7 +13,7 @@
 
 .enterActive {
   opacity: 1;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .exit {
@@ -22,5 +22,5 @@
 
 .exitActive {
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 1s ease-in-out;
 }
