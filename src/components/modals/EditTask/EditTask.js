@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
-import TaskName from './TaskName';
-import TaskDescription from './TaskDescription';
-import DueDate from '../../../../UI-Elements/buttons/DueDate';
-import DueTime from '../../../../UI-Elements/buttons/DueTime';
-import ProjectsList from './ProjectsList';
-import PriorityList from './PriorityList';
-import SaveTaskBtn from '../../../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
-import { projectIcon, priorityNumToColor } from '../../../../../utils/helpers';
-import { useProjectsContext } from '../../../../../context/ProjectsContext';
-import Task from '../../../../../data/JSClasses/Task';
+import TaskName from '../../Content/Tasks/Task/EditTaskModal/TaskName';
+import TaskDescription from '../../Content/Tasks/Task/EditTaskModal/TaskDescription';
+import DueDate from '../../UI-Elements/buttons/DueDate';
+import DueTime from '../../UI-Elements/buttons/DueTime';
+import ProjectsList from '../../Content/Tasks/Task/EditTaskModal/ProjectsList';
+import PriorityList from '../../Content/Tasks/Task/EditTaskModal/PriorityList';
+import SaveTaskBtn from '../../UI-Elements/buttons/SaveTaskBtn/SaveTaskBtn';
+import { projectIcon, priorityNumToColor } from '../../../utils/helpers';
+import { useProjectsContext } from '../../../context/ProjectsContext';
+import Task from '../../../data/JSClasses/Task';
 import { cloneDeep } from 'lodash';
 
-const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
+const EditTask = ({ task, setShowEditTaskModal }) => {
   const { allProjects, setAllProjects, setShouldUpdate } = useProjectsContext();
-  const task = selectedProject.tasks[idx]
+  const selectedProject = cloneDeep(allProjects).find(project => project.id === task._project);
+  console.log(selectedProject);
   const [taskNameText, setTaskName] = useState(task.taskName);
   const [description, setDescription] = useState(task.descr);
   const [projectSelection, setProjectSelection] = useState(selectedProject);
@@ -60,13 +61,13 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
 
     if (selectedProject.id === projectSelection.id) {
       currProject = allProjectsCopy.find(project => project.id === selectedProject.id);
-      currProject.tasks[idx] = new Task(taskNameText, description, startDate, currProject.id, prioritySelection)
+      currProject.tasks[currProject.tasks.findIndex(_task => _task.id === task.id)] = new Task(taskNameText, description, startDate, currProject.id, prioritySelection)
     } else {
       prevProject = allProjectsCopy.find(project => project.id === selectedProject.id);
       currProject = allProjectsCopy.find(project => project.id === projectSelection.id);
-      prevProject.tasks.splice(idx, 1);
+      prevProject.tasks.splice(prevProject.tasks.findIndex(_task => _task.id === task.id), 1);
       currProject.tasks.push(new Task(taskNameText, description, startDate, currProject.id, prioritySelection));
-      setShouldUpdate(true);
+      // setShouldUpdate(true);
     }
 
     setAllProjects(projects => projects.map(project => {
@@ -141,6 +142,4 @@ const EditTaskModal = ({ idx, selectedProject, setShowEditTaskModal }) => {
   )
 }
 
-export default EditTaskModal;
-
-// saveTaskBtn { selectedProject, projectSelection, idx, taskNameText, description, startDate, prioritySelection, setShowEditTaskModal }
+export default EditTask;

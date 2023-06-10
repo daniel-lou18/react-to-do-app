@@ -42,7 +42,7 @@ const AddTask = ({ showAddTask, setShowAddTask, selectedProject, setSelectedProj
   const saveTaskHandler = e => {
     e.preventDefault();
     const currProject = allProjects.find(project => project.id === projectSelection.id);
-    const newTask = new Task(taskNameText, description, startDate, currProject.projectName, prioritySelection);
+    const newTask = new Task(taskNameText, description, startDate, currProject.id, prioritySelection);
     currProject.tasks.push(newTask)
     setShowAddTask(false);
     setShouldUpdate(true);

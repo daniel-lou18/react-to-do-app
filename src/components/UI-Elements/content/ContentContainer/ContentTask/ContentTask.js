@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import EditTaskModal from '../../../../Content/Tasks/Task/EditTaskModal';
+import EditTask from '../../../../modals/EditTask/EditTask';
 import TaskNameMain from '../../../inputs/TaskNameMain/TaskNameMain';
-import MoveTaskUpBtn from '../../../buttons/MoveTaskUpBtn/MoveTaskUpBtn';
-import MoveTaskDownBtn from '../../../buttons/MoveTaskDownBtn';
 import DelTaskBtn2 from '../../../buttons/DelTaskBtn2';
 import TaskDateTime from '../../../../Content/Tasks/Task/TaskDateTime/TaskDateTime';
+import ContentProjectNameSmall from '../ContentProjectNameSmall';
 import { CSSTransition } from 'react-transition-group';
 import styles from '../../../../Content/Tasks/Task/Task.module.css';
 
@@ -23,11 +22,11 @@ const ContentTask = ({ tasks, idx }) => {
       {showTask && (
         <div className="task">
           <TaskNameMain task={task} isChecked={isChecked} setisChecked={setisChecked} color={color} backgroundColor={backgroundColor} />
-          {/* <MoveTaskUpBtn selectedProject={selectedProject} idx={idx} />
-          <MoveTaskDownBtn selectedProject={selectedProject} idx={idx} />
+          <div className='dummy'></div>
+          <div className='dummy'></div>
           <button className="btn-svg list-actions edit-task" id={task.id} onClick={() => setShowEditTaskModal(true)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="todo-header-edit pen feather feather-edit-3"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </button> */}
+          </button>
           <DelTaskBtn2 task={task} />
           <div className="description-container">
             <p className="task-descr">{task.descr}</p>
@@ -36,8 +35,9 @@ const ContentTask = ({ tasks, idx }) => {
             </svg>
           </div>
           <TaskDateTime task={task} />
+          <ContentProjectNameSmall task={task} />
         </div>)}
-      {/* <CSSTransition
+      <CSSTransition
         in={showEditTaskModal}
         timeout={{ enter: 700, exit: 300 }}
         classNames={{ ...styles }}
@@ -45,8 +45,8 @@ const ContentTask = ({ tasks, idx }) => {
         onEnter={() => setShowTask(false)}
         onExited={() => setShowTask(true)}
       >
-        <EditTaskModal idx={idx} showEditTaskModal={showEditTaskModal} setShowEditTaskModal={setShowEditTaskModal} selectedProject={selectedProject} />
-      </CSSTransition> */}
+        <EditTask setShowEditTaskModal={setShowEditTaskModal} task={task} />
+      </CSSTransition>
     </li>
   )
 }
